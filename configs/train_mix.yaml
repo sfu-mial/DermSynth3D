@@ -1,0 +1,42 @@
+name: Mixed Training
+
+# Path to generated data
+root: './data/synth_data/'
+# Path to real data
+real: './data/FUSeg/'
+# Name of folder to save the models
+save_name: 'run1' # checkpoints are saved in '../data/exp/'
+save_dir: './out'
+
+train:
+  batch_size: 16 # batch size
+  lr: 0.00005 # learning rate
+  epochs: 200 # number of epochs
+  weight_decay: 0.00005
+  num_classes: 1 # number of output classes
+  real_ratio: 0.5 # fraction of real images to be used from real dataset
+  real_batch_ratio: 0.5 # fraction of real samples in each batch
+  pretrain: True # use pretrained DeepLabV3 weights
+  mode: 1.0 # Fraction of the number of synthetic images to be used for training
+  resume: False # resume training from last saved model
+  root: './data/synth_data/'
+  # Path to real data
+  real: './data/FUSeg/'
+
+  # ImageNet
+  mean: (0.485, 0.456, 0.406)
+  std: (0.229, 0.224, 0.225)
+  # Augmentations
+  min_v: 0.8
+  max_v: 1.2
+  img_size: (256, 256)
+  save_every: 5
+
+val:
+  batch_size: 1
+  log_every: 100
+  val_every: 500 # Validate every N iterations
+  
+test:
+  batch_size: 1
+  test_every: 500 # Test every N iterations

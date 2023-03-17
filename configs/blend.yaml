@@ -1,0 +1,67 @@
+name: DermSynth3d
+
+# Settings for pasting and blending lesions
+
+blending:
+  # Path to 3DBodyTex v1
+  bodytex_dir: './data/3dbodytex-1.1-highres/'
+  # Name of the mesh to blend
+  mesh_name: '006-f-run'
+  # Path to FitzPatrick17k lesions
+  fitz_dir: './data/fitzpatrick17k/data/finalfitz17k/'
+  # Path to annotated Fitz17k lesions with masks
+  annot_dir: './data/annotations/'
+  # Path to save the new texture maps
+  tex_dir: './data/lesions/'
+  # Name of extension to add to new texture maps
+  ext: 'debug'
+  # Number of lesions to paste/blend on each mesh
+  num_paste: 50
+  # Number of iterations for blending the lesion
+  num_iter: 400
+  # Learning rate for optimization
+  lr: 0.005
+  # Image size to render
+  img_w: 512
+  img_h: 512
+  view_size: (512, 512)
+
+# Settings for generating 2D views from blended texture maps
+generate:
+  # Number of images to render per mesh
+  num_views: 2000
+  # Name of the mesh to blend
+  mesh_name: '006-f-run'
+  # Path to save the rendering and ground truth annotations
+  save_dir: './out/blended_lesions/'
+  # Path to anatomy labels for 3DBodyTex v1.
+  anatomy_dir: './data/bodytex_anatomy_labels/'
+  # Path to the background scenes
+  background_dir: './data/background/IndoorScene/'
+  # Whether to paste lesions for cheap blending
+  paste: False
+  # Image size to render
+  img_w: 512
+  img_h: 512
+  view_size: (512, 512)
+  # Threshold amount of lesion to be present to generate a view
+  percent_skin: 0.2
+  # Paths to skin3d repo
+  skin3d: './skin3d/data/3dbodytex-1.1-highres/bodytex.csv'
+  # Paths to skin3d nevi annotations
+  skin3d_annot: './skin3d/data/3dbodytex-1.1-highres/annotations/'
+
+  random:
+    surface_offset_bounds: (0.1, 1.3)
+    ambient_bounds: (0.3, 0.99)
+    specular_bounds: (0, 0.1)
+    diffuse_bounds : (0.3, 0.99)
+    mat_diffuse_bounds : (0.3, 0.99)
+    mat_specular_bounds : (0., 0.05)
+    znear: 0.01
+    light_pos: None
+    shininess: (30, 60)
+    sphere_pos: False
+    elev_bounds : (0, 180)
+    azim_bounds : (-90, 90)
+    background_blur_radius_bounds : (0, 3)

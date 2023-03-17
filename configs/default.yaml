@@ -1,0 +1,6 @@
+device: 'cuda'
+img_w: 512
+img_h: 512
+extension:
+  image_extension: '.jpg'
+  target_extension: '.png'

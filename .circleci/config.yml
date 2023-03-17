@@ -1,0 +1,56 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@2.2.0
+
+jobs:
+  check-and-build-only:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      # - docker/check:
+      #     use-docker-credentials-store: false 
+      - docker/build:
+          debug: true 
+          image: dermsynth3d 
+          lint-dockerfile: false 
+          treat-warnings-as-errors: false 
+  build_conda_env:
+    docker:
+      - image: continuumio/miniconda3
+    # working_directory: ~/
+    steps:
+      - checkout
+      # Step 2: create virtual env and install dependencies
+      - run:
+          name: install dependencies
+          command: |
+            conda env create -f dermsynth3d.yml
+            source activate dermsynth3d
+            conda env list
+          name: test imports
+            conda activate dermsynth3d
+            conda list | grep torch\|sci\|cv
+            python -m scripts.gen_data
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: psf/black@stable
+ 
+workflows:
+  build_and_test:
+    jobs:
+      - check-and-build-only
+      - build_conda_env
+      - lint
+
+# jobs:
+#   build:
+#     docker:
+#       - image: cimg/base:stable
+#     steps:
+#       - docker/check:
+#           use-docker-credentials-store: false 
+     
+  
