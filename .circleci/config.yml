@@ -13,7 +13,7 @@ jobs:
       - DOCKER_PASS = ${DOCKER_PASSWORD}
       - UID = 301455
       - GID = 8088
-      - USER = ${USER}
+      - USER = "sfu-mial"
     steps:
       - checkout
       - setup_remote_docker:
