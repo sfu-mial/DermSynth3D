@@ -3,7 +3,6 @@ orbs:
   docker: circleci/docker@2.2.0
 jobs:
   build:
-    executor: docker/docker
     docker:
       - image: cimg/base:stable
         auth:
