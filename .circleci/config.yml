@@ -18,14 +18,18 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
+          version: 20.10.11
           docker_layer_caching: true
+          # command: echo "Remote Docker Setup"
       - run:
-          name: Build Docker image
+          name: check correct path
           command: |
             printenv | grep "DOCKER\|UID\|GID"
-            readlink -f .
             pwd
             ls -lkht 
+      - run: 
+          name: docker build
+          command: |
             docker build --build-arg UID=${UID} --build-arg GID=${GID} -t dermsynth3d:${CIRCLE_SHA1} -f Dockerfile . 
       - run:
           name: Login to Docker Hub
