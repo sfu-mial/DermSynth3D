@@ -1,30 +1,75 @@
 version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
-  # docker-tools: livup/docker-tools@1.0.0
 jobs:
   build:
-    executor: docker/docker
     docker:
       - image: cimg/base:stable
         auth:
           username: ${DOCKER_USERNAME}
           password: ${DOCKER_PASSWORD}
-          
     environment:
-      DOCKER_USER: ${DOCKER_USERNAME}
-      DOCKER_PASS: ${DOCKER_PASSWORD}
-      UID: ${UID}
-      GID: ${GID}
-      USER: ${USER}
+      - DOCKER_USER = ${DOCKER_USERNAME}
+      - DOCKER_PASS = ${DOCKER_PASSWORD}
+      # - UID = 301455
+      # - GID = 8088
+      # - USER = "sfu-mial"
     steps:
       - checkout
-      - docker/build:
-          image: dermsythn3d
-      - docker/push:
-          image: '${DOCKER_USER}/dermsynth3d'
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
+          # command: echo "Remote Docker Setup"
+      - run:
+          name: check correct path
+          command: |
+            printenv | grep "DOCKER\|UID\|GID"
+            pwd
+            ls -lkht 
+            echo 
+      - run: 
+          name: docker build
+          command: |
+            docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) -t dermsynth3d:${CIRCLE_SHA1} -f Dockerfile . 
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin 
+      - run:
+          name: Push Docker image to Docker Hub
+          command: |
+            docker tag dermsynth3d:${CIRCLE_SHA1} "${DOCKER_USERNAME}/dermsynth3d"
+            docker push "${DOCKER_USERNAME}/dermsynth3d"
 
-workflows:
-  build-and-push:
-    jobs:
-      - build
+# version: 2.1
+# orbs:
+#   docker: circleci/docker@2.2.0
+# jobs:
+#   build-and-push:
+#     executor: docker/docker
+#     docker:
+#       - image: cimg/base:stable
+#         name: docker login
+#         auth: 
+#           username: $DOCKER_USERNAME
+#           password: $DOCKER_PASSWORD
+#     steps:
+#       - setup_remote_docker
+#       - checkout
+#       - docker/check
+#       - docker/build:
+#           # image: dermsynth3d/v1
+#           image: sinashish/dermsynth3d
+#       - docker/push:
+#           digest-path: /tmp/digest.txt
+#           image: sinashish/dermsynth3d
+#       # - docker/publish:
+#       #     deploy: true
+#       #     image: dermsynth3d/v1
+#       - run:
+#           command: |
+#             echo "Digest is: $(</tmp/digest.txt)"
+# workflows:
+#   commit:
+#     jobs:
+#       - build-and-push
