@@ -12,13 +12,10 @@ jobs:
           password: $DOCKER_PASSWORD
     steps:
       - setup_remote_docker
-      - run:
-          command: |
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD
       - checkout
-      - docker/check:
-          docker-username: DOCKER_USERNAME
-          docker-password: DOCKER_PASSWORD
+      # - docker/check:
+      #     docker-username: DOCKER_USERNAME
+      #     docker-password: DOCKER_PASSWORD
       - docker/build:
           # image: dermsynth3d/v1
           image: sinashish/dermsynth3d
