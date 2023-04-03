@@ -34,12 +34,12 @@ jobs:
       - run:
           name: Login to Docker Hub
           command: |
-            echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin 
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin 
       - run:
           name: Push Docker image to Docker Hub
           command: |
-            docker tag dermsynth3d:${CIRCLE_SHA1} "${DOCKER_USER}/dermsynth3d"
-            docker push "${DOCKER_USER}/dermsynth3d"
+            docker tag dermsynth3d:${CIRCLE_SHA1} "${DOCKER_USERNAME}/dermsynth3d"
+            docker push "${DOCKER_USERNAME}/dermsynth3d"
 
 # version: 2.1
 # orbs:
