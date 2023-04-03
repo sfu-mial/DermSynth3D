@@ -1,30 +1,60 @@
 version: 2.1
-orbs:
-  docker: circleci/docker@2.2.0
-  # docker-tools: livup/docker-tools@1.0.0
+
 jobs:
   build:
-    executor: docker/docker
     docker:
-      - image: cimg/base:stable
-        auth:
-          username: ${DOCKER_USERNAME}
-          password: ${DOCKER_PASSWORD}
-          
+      - image: docker:20.10.7
     environment:
-      DOCKER_USER: ${DOCKER_USERNAME}
-      DOCKER_PASS: ${DOCKER_PASSWORD}
-      UID: ${UID}
-      GID: ${GID}
-      USER: ${USER}
+      - DOCKER_USER = ${DOCKER_USERNAME}
+      - DOCKER_PASS = ${DOCKER_PASSWORD}
+      - UID = ${UID}
+      - GID = ${GID}
+      - USER = ${USER}
     steps:
       - checkout
-      - docker/build:
-          image: dermsythn3d
-      - docker/push:
-          image: '${DOCKER_USER}/dermsynth3d'
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --build-arg UID=${UID} --build-arg GID=${GID} -t dermsynth3d:${CIRCLE_SHA1} -f 
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin 
+      - run:
+          name: Push Docker image to Docker Hub
+          command: |
+            docker tag dermsynth3d:${CIRCLE_SHA1} "${DOCKER_USER}/dermsynth3d"
+            docker push "${DOCKER_USER}/dermsynth3d"
 
-workflows:
-  build-and-push:
-    jobs:
-      - build
+# version: 2.1
+# orbs:
+#   docker: circleci/docker@2.2.0
+# jobs:
+#   build-and-push:
+#     executor: docker/docker
+#     docker:
+#       - image: cimg/base:stable
+#         name: docker login
+#         auth: 
+#           username: $DOCKER_USERNAME
+#           password: $DOCKER_PASSWORD
+#     steps:
+#       - setup_remote_docker
+#       - checkout
+#       - docker/check
+#       - docker/build:
+#           # image: dermsynth3d/v1
+#           image: sinashish/dermsynth3d
+#       - docker/push:
+#           digest-path: /tmp/digest.txt
+#           image: sinashish/dermsynth3d
+#       # - docker/publish:
+#       #     deploy: true
+#       #     image: dermsynth3d/v1
+#       - run:
+#           command: |
+#             echo "Digest is: $(</tmp/digest.txt)"
+# workflows:
+#   commit:
+#     jobs:
+#       - build-and-push
