@@ -2,31 +2,32 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
 jobs:
-  build-and-push:
-    executor: docker/docker
+  build:
+    # executor: docker/docker
     docker:
       - image: cimg/base:stable
-        name: docker login
-        auth: 
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+        auth:
+          username: ${DOCKER_USERNAME}
+          password: ${DOCKER_PASSWORD}
+    environment:
+      DOCKER_USER: ${DOCKER_USERNAME}
+      DOCKER_PASS: ${DOCKER_PASSWORD}
+      UID: ${UID}
+      GID: ${GID}
+      USER: ${USER}
     steps:
-      - setup_remote_docker
       - checkout
-      - docker/check
       - docker/build:
-          # image: dermsynth3d/v1
-          image: sinashish/dermsynth3d
+          dockerfile: Dockerfile
+          tag: ${CIRCLE_SHA1}
+          image: dermsythn3d
       - docker/push:
-          digest-path: /tmp/digest.txt
-          image: sinashish/dermsynth3d
-      # - docker/publish:
-      #     deploy: true
-      #     image: dermsynth3d/v1
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+          image: '${DOCKER_USER}/dermsynth3d'
+
 workflows:
-  commit:
+  build-and-push:
     jobs:
-      - build-and-push
+      - build:
+          context:
+            - build-env-vars
+            - docker-hub-creds
