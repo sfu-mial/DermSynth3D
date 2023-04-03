@@ -10,8 +10,7 @@ jobs:
         auth:
           username: ${DOCKER_USERNAME}
           password: ${DOCKER_PASSWORD}
-          docker-username: ${DOCKER_USERNAME}
-          docker-password: ${DOCKER_PASSWORD}
+          
     environment:
       DOCKER_USER: ${DOCKER_USERNAME}
       DOCKER_PASS: ${DOCKER_PASSWORD}
