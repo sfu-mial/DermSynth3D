@@ -1,14 +1,17 @@
 version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
+  # docker-tools: livup/docker-tools@1.0.0
 jobs:
   build:
-    # executor: docker/docker
+    executor: docker/docker
     docker:
       - image: cimg/base:stable
         auth:
           username: ${DOCKER_USERNAME}
           password: ${DOCKER_PASSWORD}
+          docker-username: ${DOCKER_USERNAME}
+          docker-password: ${DOCKER_PASSWORD}
     environment:
       DOCKER_USER: ${DOCKER_USERNAME}
       DOCKER_PASS: ${DOCKER_PASSWORD}
@@ -18,7 +21,6 @@ jobs:
     steps:
       - checkout
       - docker/build:
-          tag: ${CIRCLE_SHA1}
           image: dermsythn3d
       - docker/push:
           image: '${DOCKER_USER}/dermsynth3d'
@@ -26,7 +28,4 @@ jobs:
 workflows:
   build-and-push:
     jobs:
-      - build:
-          context:
-            - build-env-vars
-            - docker-hub-creds
+      - build
