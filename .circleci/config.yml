@@ -1,9 +1,13 @@
 version: 2.1
-
+orbs:
+  docker: circleci/docker@2.2.0
 jobs:
   build:
     docker:
-      - image: docker:20.10.7
+      - image: cimg/base:stable
+        auth:
+          username: ${DOCKER_USERNAME}
+          password: ${DOCKER_PASSWORD}
     environment:
       - DOCKER_USER = ${DOCKER_USERNAME}
       - DOCKER_PASS = ${DOCKER_PASSWORD}
