@@ -4,7 +4,7 @@ orbs:
 jobs:
   build-and-push:
     docker:
-      - image: circleci/docker@2.2.0
+      - image: cimg/base:stable
         auth: 
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
