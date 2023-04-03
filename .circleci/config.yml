@@ -3,13 +3,16 @@ orbs:
   docker: circleci/docker@2.2.0
 jobs:
   build-and-push:
+    docker:
+      - image: circleci/docker@2.2.0
+        auth: 
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     executor: docker/docker
     steps:
       - setup_remote_docker
       - checkout
-      - docker/check: 
-          docker-username: $DOCKER_USERNAME
-          docker-password: $DOCKER_PASSWORD
+      - docker/check
       - docker/build:
           # image: dermsynth3d/v1
           image: sinashish/dermsynth3d
