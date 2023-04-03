@@ -3,6 +3,7 @@ orbs:
   docker: circleci/docker@2.2.0
 jobs:
   build:
+    executor: docker/docker
     docker:
       - image: cimg/base:stable
         auth:
@@ -22,7 +23,7 @@ jobs:
             printenv | grep "DOCKER\|UID\|GID"
             readlink -f .
             pwd
-            cd ${HOME}/project
+            ls -lkht 
             docker build --build-arg UID=${UID} --build-arg GID=${GID} -t dermsynth3d:${CIRCLE_SHA1} -f Dockerfile . 
       - run:
           name: Login to Docker Hub
