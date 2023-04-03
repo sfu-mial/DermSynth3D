@@ -18,7 +18,7 @@ jobs:
     steps:
       - checkout
       - docker/build:
-          dockerfile: Dockerfile
+          dockerfile: ~/project/Dockerfile
           tag: ${CIRCLE_SHA1}
           image: dermsythn3d
       - docker/push:
