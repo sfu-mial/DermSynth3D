@@ -15,6 +15,10 @@ jobs:
       - run:
           name: Build Docker image
           command: |
+            printenv | grep "DOCKER\|UID\|GID"
+            readlink -f .
+            pwd
+            cd ${HOME}/project
             docker build --build-arg UID=${UID} --build-arg GID=${GID} -t dermsynth3d:${CIRCLE_SHA1} -f Dockerfile . 
       - run:
           name: Login to Docker Hub
