@@ -14,8 +14,6 @@ jobs:
       - setup_remote_docker
       - checkout
       # - docker/check:
-      #     docker-username: DOCKER_USERNAME
-      #     docker-password: DOCKER_PASSWORD
       - docker/build:
           # image: dermsynth3d/v1
           image: sinashish/dermsynth3d
