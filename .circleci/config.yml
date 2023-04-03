@@ -4,7 +4,6 @@ orbs:
 jobs:
   build-and-push:
     executor: docker/docker
-
     docker:
       - image: cimg/base:stable
         name: docker login
@@ -17,7 +16,9 @@ jobs:
           command: |
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD
       - checkout
-      - docker/check
+      - docker/check:
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_PASSWORD
       - docker/build:
           # image: dermsynth3d/v1
           image: sinashish/dermsynth3d
