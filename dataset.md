@@ -6,8 +6,7 @@ The datasets used in this work, can be broadly categorized into data required fo
 All the datasets should be downloaded and placed in the `data` directory. 
 
 The directory structure of `data` should be as follows:
-
-
+<a name="tree"></a>
 ```bash
 DermSynth3D_private/
 ┣ ...						   		# other source code
@@ -55,10 +54,25 @@ Hence, to generate the data, make sure to get the `.obj` files for these two mes
 
 After accepting the licence, download and unzip the data in `./data/`.
 
+### Download the 3DBodyTex.v1 annotations
+
+#### Non-skin texture maps
+<img src="./assets/final.png" width="100%" height="50%">
+
+We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://drive.google.com/file/d/1qA9_8cn6ozfJrlct95OH2k_ALRBy4caE/view?usp=sharing).
+
+#### Anatomy labels
+<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240">
+
+We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://drive.google.com/file/d/1i6Sa1CXLe5sw1I0Wi_2diQlVv-jmz4ol/view?usp=sharing).
+
+The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
+
 ### Download the Fitzpatrick17k dataset
 
 We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See instructions to get access to the Fitzpatrick17k images.
 
+We provide the raw images for the Fitzpatrick17k dataset [here](https://drive.google.com/file/d/1K7lX7kfE7hUV8F4FnaG9aVhema8hhfq1/view?usp=share_link).
 After downloading the dataset, unzip the dataset:
 ```
 unzip fitzpatrick17k.zip -d data/fitzpatrick17k/
@@ -67,37 +81,51 @@ unzip fitzpatrick17k.zip -d data/fitzpatrick17k/
 ### Download the Fitzpatrick17k annotations
 
 The densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory.
+More of such annotations can be downloaded from [here](https://drive.google.com/file/d/1mmKvImhljfPBD-I8Z4v33pykdgz1CFsR/view?usp=share_link).
 
 ### Download the Background Scenes
 
 Although you can use any scenes as background for generating the random views of the lesioned-meshes, we used [SceneNet RGB-D](https://robotvault.bitbucket.io/scenenet-rgbd.html) for the background IndoorScenes. Specifically, we used [this split](https://www.doc.ic.ac.uk/~bjm113/scenenet_data/train_split/train_0.tar.gz), and sampled 3000 images from it.
 
+For convenience, the background scenes we used to generate the ssynthetic dataset can be downloaded from [here](https://drive.google.com/file/d/1ZPOHzEungZG_BgFyVWrp_UPBVlO-8sO1/view?usp=sharing).
+
 </details>
 
+---
 <details>
 
 <summary> Data For Training </summary>
 
 ### Download the FUSeg dataset
 
-The Foot Ulcer Segmentation Challenge (FUSeg) dataset is available to download from [their official repository](https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge). Download and unpack the dataset at `data/FUSeg/`, maintaining the Folder Structure shown below.
+The Foot Ulcer Segmentation Challenge (FUSeg) dataset is available to download from [their official repository](https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge). 
+Download and unpack the dataset at `data/FUSeg/`, maintaining the Folder Structure shown above.
+
+For simplicity, we mirror the FUSeg dataset [here](https://drive.google.com/file/d/1Rhf_NAmR373Oyxa_W4l1y3BdiHojHRTZ/view?usp=sharing).
 
 ### Download the Pratheepan dataset
 
-The Pratheepan dataset is available to download from [their official website](https://web.fsktm.um.edu.my/~cschan/downloads_skin_dataset.html). The images and the corresponding ground truth masks are available in a ZIP file hosted on Google Drive. Download and unpack the dataset at `data/Pratheepan_Dataset/`.
+The Pratheepan dataset is available to download from [their official website](https://web.fsktm.um.edu.my/~cschan/downloads_skin_dataset.html). 
+The images and the corresponding ground truth masks are available in a ZIP file hosted on Google Drive. Download and unpack the dataset at `data/Pratheepan_Dataset/`.
 
 ### Download the PH2 dataset
 
-The PH2 dataset can be downloaded from [the official ADDI Project website](https://www.fc.up.pt/addi/ph2%20database.html). Download and unpack the dataset at `data/ph2/`, maintaining the Folder Structure shown below.
+The PH2 dataset can be downloaded from [the official ADDI Project website](https://www.fc.up.pt/addi/ph2%20database.html). 
+Download and unpack the dataset at `data/ph2/`, maintaining the Folder Structure shown below.
 
 ### Download the DermoFit dataset
 
-The DermoFit dataset is available through a paid perpetual academic license from the University of Edinburgh. Please access the dataset following the instructions for [the DermoFit Image Library](https://licensing.edinburgh-innovations.ed.ac.uk/product/dermofit-image-library) and unpack it at `data/dermofit/`, maintaining the Folder Structure shown below.
+The DermoFit dataset is available through a paid perpetual academic license from the University of Edinburgh. Please access the dataset following the instructions for [the DermoFit Image Library](https://licensing.edinburgh-innovations.ed.ac.uk/product/dermofit-image-library) and unpack it at `data/dermofit/`, maintaining the Folder Structure shown above.
 
 ### Creating the Synthetic dataset
+![annots](./assets/AnnotationOverview.png)
+For convenience, we provide the generated synthetic data we used in this work [here](https://drive.google.com/file/d/1mVL9-rWIqNPhIUNiGemRt1t623BS08Ra/view?usp=sharing).
 
-To prepare the synthetic dataset for training. Sample the `images`, and `targets` from the path where you saved the rendered lesions (`./out/blend_lesions/`). Then organise them into `train/val`.
+If you want to train your models on a different split of the synthetic data, you can download a dataset generated by blending lesions on 26 3DBodyTex scans from [here](https://drive.google.com/file/d/1GlQ_i1LNTxzeZB9MXOiSkrR7-VPnumaM/view?usp=sharing).
+To prepare the synthetic dataset for training. Sample the `images`, and `targets` from the path where you saved this dataset and then organise them into `train/val`.
 
 Alternatively, you can use the code provided in `scripts/prep_data.py` to create it.
+
+Even better, you can generate your own dataset, by following the instructions [here](./README.md#generating-synthetic-dataset).
 
 </details>

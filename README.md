@@ -1,5 +1,10 @@
 # DermSynth3D
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/sfu-mial/DermSynth3D/tree/main.svg?style=svg&circle-token=176de57353747d240e619bdf9aacf9f716e7d04f)](https://dl.circleci.com/status-badge/redirect/gh/sfu-mial/DermSynth3D/tree/main) ![GPLv3](https://img.shields.io/static/v1.svg?label=📃%20License&message=GPL%20v3.0&color=green)[![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=N/A&color=red)](#) [![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=N/A&color=orange)](#) [![Tweet about this](https://img.shields.io/static/v1.svg?label=Tweet&message=🎵&color=blue&logo=twitter&style=social)](https://ctt.ac/rg_m4) ![Copyright](https://img.shields.io/static/v1.svg?label=DermSynth3D%20©️%20&message=%202023&labelColor=green&color=blue) 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/sfu-mial/DermSynth3D/tree/main.svg?style=svg&circle-token=176de57353747d240e619bdf9aacf9f716e7d04f)](https://dl.circleci.com/status-badge/redirect/gh/sfu-mial/DermSynth3D/tree/main) 
+![GPLv3](https://img.shields.io/static/v1.svg?label=📃%20License&message=GPL%20v3.0&color=green)
+[![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=N/A&color=red)](#) 
+[![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=N/A&color=orange)](#) 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Copyright](https://img.shields.io/static/v1.svg?label=DermSynth3D%20©️%20&message=%202023&labelColor=green&color=blue) 
 
 This is the official code repository following our work [DermSynth3D](#link-to-arxiv).
 
@@ -89,7 +94,15 @@ conda activate dermsynth3d
 docker build -t dermsynth3d --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f Dockerfile .
 # Run the container in interactive mode for using DermSynth3D
 # See 3. Usage
-docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3
+docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
+```
+For provide the pre-built docker image, which can be be used as well:
+```bash
+# pull the docker image
+docker pull sinashish/dermsynth3d:latest
+# Run the container in interactive GPU mode for generating data and training models
+# mount the data directory to the container
+docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
 
 #### <span style="color: red">NOTE</span>
@@ -112,7 +125,8 @@ Follow the instructions in [dataset.md](./dataset.md) to download the datasets f
 <a name='gen'></a>
 
 ### Generating Synthetic Dataset
-![synthetic data](./assets/fig_1-min.png)
+![annotated data](./assets/AnnotationOverview.png)
+
 Before running any code, make sure that you have downloaded the data necessary for blending as mentioned in [dataset.md](./dataset.md) and folder structure is as described above.
 If the folder structure is different, then please update the paths accordingly in `configs/blend.yaml`.
 
@@ -135,7 +149,7 @@ python -u scripts/gen_data.py --lr <learning rate> \
 Feel free to play around with `random` parameter in `configs/blend.yaml` to control lighting, material and view points.
 
 #### Post-Process Renderings with Unity
-
+![synthetic data](./assets/fig_1-min.png)
 Follow the detailed instructions outlined [here](./unity.md) to create photorealistic renderings using Unity.
 
 <a name='prep'></a>
