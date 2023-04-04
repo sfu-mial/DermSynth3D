@@ -58,7 +58,7 @@ DermSynth3D_private/
 ## Table of contents
 - [Installation](#installation)
   - [using conda](#using-conda)
-  - [using Docker](#using-docker)
+  - [using Docker](#using-docker) **Recommended**
 - [Datasets](#datasets)
 - [Usage](#usage)
   - [Generating Synthetic Dataset](#generating-synthetic-dataset)
