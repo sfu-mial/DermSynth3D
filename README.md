@@ -96,7 +96,7 @@ docker build -t dermsynth3d --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f
 # See 3. Usage
 docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
-For provide the pre-built docker image, which can be be used as well:
+We provide the [pre-built docker image](https://hub.docker.com/r/sinashish/dermsynth3d), which can be be used as well:
 ```bash
 # pull the docker image
 docker pull sinashish/dermsynth3d:latest
