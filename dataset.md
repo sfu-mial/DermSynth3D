@@ -1,7 +1,7 @@
 
 # Instructions for downloading the datasets
 
-The datasets used in this work, can be broadly categorized into data required for blending and the data necessary for evaluation.
+The datasets used in this work can be broadly categorized into data required for blending and data necessary for evaluation.
 
 All the datasets should be downloaded and placed in the `data` directory. 
 
