@@ -1,5 +1,3 @@
-<script type="module" src="./node_modules/@github/image-crop-element/dist/index.js">
-</script>
 # Instructions for downloading the datasets
 
 The datasets used in this work can be broadly categorized into data required for blending and data necessary for evaluation.
@@ -88,7 +86,7 @@ The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` data
 ### Download the Fitzpatrick17k dataset
 | _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
 |:-:|:-:|
-|![image](https://www.dermaamin.com/site/images/clinical-pic/J/juvenile-xanthogranuloma/juvenile-xanthogranuloma63.jpg) | ![mask.](data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png)|
+|![image](assets/juvenile-xanthogranuloma63.jpg) | ![mask.](data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png)|
 |<p align=left> We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See their instructions to get access to the Fitzpatrick17k images. <br>We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).<br>After downloading the dataset, unzip the dataset:<br>```unzip fitzpatrick17k.zip -d data/fitzpatrick17k/```</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). </p>|
 <!-- <img src="assets/fitz.png" width="50%" height="30%"> -->
 <!-- <img src="assets/fitz.png" width="50%" height="30%" align="right"> -->
