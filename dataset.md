@@ -1,4 +1,5 @@
-
+<script type="module" src="./node_modules/@github/image-crop-element/dist/index.js">
+</script>
 # Instructions for downloading the datasets
 
 The datasets used in this work can be broadly categorized into data required for blending and data necessary for evaluation.
@@ -43,6 +44,8 @@ DermSynth3D_private/
 
 ### Download 3DBodyTex.v1 meshes
 
+<img align="right" src = "assets/scans_blurred.png" width="224px" height="224px" ></img> 
+<!-- ![3dbodytex sample](assets/scans_blurred.png) -->
 The `3DBodyTex.v1` dataset can be downloaded from [here](https://cvi2.uni.lu/datasets/).
 
 `3DBodyTex.v1` contains the meshes and texture images used in this work and can be downloaded from the external site linked above (after accepting a license agreement). 
@@ -54,23 +57,43 @@ Hence, to generate the data, make sure to get the `.obj` files for these two mes
 
 After accepting the licence, download and unzip the data in `./data/`.
 
+---
+
 ### Download the 3DBodyTex.v1 annotations
 
-#### Non-skin texture maps
+| _Non-skin texture maps_| _Anatomy labels_|
+|:-:|:-:|
+|<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://vault.sfu.ca/index.php/s/s8Sy7JdA74r1GN9). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://vault.sfu.ca/index.php/s/TLLqxCs7MVhS117). </p>|
+|<img src="./assets/final.png" width="320" height="240" align=left>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=left>|
+
+<!-- |<img src="data/lesions/006-f-run/model_highres_0_normalized_mask.png" width="50%" height="50%">| <img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320px" height="240px"> --> 
+<!-- 
+#### *Non-skin texture maps*
 <img src="./assets/final.png" width="100%" height="50%">
 
 We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://vault.sfu.ca/index.php/s/s8Sy7JdA74r1GN9).
 
-#### Anatomy labels
-<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240">
+#### *Anatomy labels*
+<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240" > -->
 
-We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://vault.sfu.ca/index.php/s/TLLqxCs7MVhS117).
+<!-- <img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240" align="right" > -->
+
+<!-- We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://vault.sfu.ca/index.php/s/TLLqxCs7MVhS117). -->
 
 The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
 
-### Download the Fitzpatrick17k dataset
+---
+<!-- <image-crop src="assets/final.png" ></image-crop> -->
 
-We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See instructions to get access to the Fitzpatrick17k images.
+### Download the Fitzpatrick17k dataset
+| _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
+|:-:|:-:|
+|![image](https://www.dermaamin.com/site/images/clinical-pic/J/juvenile-xanthogranuloma/juvenile-xanthogranuloma63.jpg) | ![mask.](data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png)|
+|<p align=left> We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See their instructions to get access to the Fitzpatrick17k images. <br>We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).<br>After downloading the dataset, unzip the dataset:<br>```unzip fitzpatrick17k.zip -d data/fitzpatrick17k/```</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). </p>|
+<!-- <img src="assets/fitz.png" width="50%" height="30%"> -->
+<!-- <img src="assets/fitz.png" width="50%" height="30%" align="right"> -->
+
+<!-- We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See instructions to get access to the Fitzpatrick17k images.
 
 We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).
 After downloading the dataset, unzip the dataset:
@@ -78,12 +101,18 @@ After downloading the dataset, unzip the dataset:
 unzip fitzpatrick17k.zip -d data/fitzpatrick17k/
 ```
 
+
 ### Download the Fitzpatrick17k annotations
 
 The densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory.
-More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).
+More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). -->
+---
 
 ### Download the Background Scenes
+
+|||
+|:-:|:-:|
+|![scene1](assets/50.jpg)|![scene2](assets/700.jpg)|
 
 Although you can use any scenes as background for generating the random views of the lesioned-meshes, we used [SceneNet RGB-D](https://robotvault.bitbucket.io/scenenet-rgbd.html) for the background IndoorScenes. Specifically, we used [this split](https://www.doc.ic.ac.uk/~bjm113/scenenet_data/train_split/train_0.tar.gz), and sampled 3000 images from it.
 
@@ -98,26 +127,47 @@ For convenience, the background scenes we used to generate the ssynthetic datase
 
 ### Download the FUSeg dataset
 
+|||
+|:-:|:-:|
+|![scene1](assets/0011.png)|![scene2](assets/0011_m.png)|
+
 The Foot Ulcer Segmentation Challenge (FUSeg) dataset is available to download from [their official repository](https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge). 
 Download and unpack the dataset at `data/FUSeg/`, maintaining the Folder Structure shown above.
 
 For simplicity, we mirror the FUSeg dataset [here](https://vault.sfu.ca/index.php/s/2mb8kZg8wOltptT).
 
+ ---
+
 ### Download the Pratheepan dataset
+
+![prath](assets/prath.png)
 
 The Pratheepan dataset is available to download from [their official website](https://web.fsktm.um.edu.my/~cschan/downloads_skin_dataset.html). 
 The images and the corresponding ground truth masks are available in a ZIP file hosted on Google Drive. Download and unpack the dataset at `data/Pratheepan_Dataset/`.
 
+---
+
 ### Download the PH2 dataset
+
+![ph2](assets/ph2.png)
 
 The PH2 dataset can be downloaded from [the official ADDI Project website](https://www.fc.up.pt/addi/ph2%20database.html). 
 Download and unpack the dataset at `data/ph2/`, maintaining the Folder Structure shown below.
 
+---
+
 ### Download the DermoFit dataset
+
+![dermo](assets/Example-images-for-the-different-skin-lesions-including-BCC-a-IEC-b-SCC-c-and_W640.jpg)
+
+_An example image from the DermoFit dataset showing different skin lesions._
 
 The DermoFit dataset is available through a paid perpetual academic license from the University of Edinburgh. Please access the dataset following the instructions for [the DermoFit Image Library](https://licensing.edinburgh-innovations.ed.ac.uk/product/dermofit-image-library) and unpack it at `data/dermofit/`, maintaining the Folder Structure shown above.
 
+---
+
 ### Creating the Synthetic dataset
+
 ![annots](./assets/AnnotationOverview.png)
 For convenience, we provide the generated synthetic data we used in this work for various downstream tasks [here](https://vault.sfu.ca/index.php/s/mF2NVawbvvbW9lU).
 
