@@ -1,4 +1,4 @@
-# DermSynth3D PBR Using Unity
+# DermSynth3D Physically Based Rendering (PBR) Using Unity
 
 ## Summary
 
@@ -27,9 +27,9 @@ The render creation process consists of four main steps:
 
 Follow the instructions in [datasets](./dataset.md) to download the [3DBodyTex](https://cvi2.uni.lu/3dbodytexv1/) scans (OBJ and MTL files) required to create renders. 
 
-In addition, follow the instructions in [usage](./README.md#generating-synthetic-dataset) to generate the synthetic data and metadata using DermSynth3D pipeline.
+In addition, follow the instructions in [usage](../README.md#generating-synthetic-dataset) to generate the synthetic data and metadata using DermSynth3D pipeline.
 
-The (sub)folder in [`./data`](./datasets.md) should look like below:
+The (sub)folder in [`./data`](./dataset.md) should look like below:
 <!-- 
 all the files stored in the *unity* folder in the [DermSynth3D](https://github.com/jeremykawahara/DermSynth3D_private) GitHub repository are required. -->
 <!-- 
@@ -138,7 +138,7 @@ In order to convert the `.obj` scans to `.fbx`:
 2. Import the OBJ file into [Blender](https://www.blender.org/).
 3. Export the scan as an FBX file, ensuring the correct export settings (see Figure below) are selected.
 
-![FBX File Export Settings](assets/blender_fbx_export_settings.jpg)
+![FBX File Export Settings](../assets/blender_fbx_export_settings.jpg)
 
 For more information about converting OBJ files to FBX files using [Blender](https://www.blender.org/), see [this](https://www.youtube.com/watch?v=jZWSHBEOaR0&ab_channel=RichTanner) video.
 
@@ -198,7 +198,7 @@ After the pre-processing of raw data is completeed, we are now ready to create t
 Consequently, run the python script `add_2d_bkg_to_unity_renders.py` to combine the background images and the renders and binary masks created using [Unity](https://unity.com/) and the Unity [perception package](https://github.com/Unity-Technologies/com.unity.perception), and then save the resulting images as PNG files.
 The Figure below shows an overview of this process.
 
-![Render Post-Processing Overview](./assets/post_processing_overview.png)
+![Render Post-Processing Overview](../assets/post_processing_overview.png)
 
 The script assumes that folders and files have the structure and naming convention shown below. It creates two new folders (*renders* and *masks*) in each modified 3DBodyTex scan folder (e.g. *008-f-run-blended* in the Figure below) and saves the post-processed images as PNG files in renders and renamed copies of the binary masks in *masks*. The name of each post-processed image is the unique ID listed in the corresponding CSV file of raw data. 
 <!-- 
