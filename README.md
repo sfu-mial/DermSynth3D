@@ -68,7 +68,7 @@ DermSynth3D/
 ## Table of Contents
 - [Installation](#installation)
   - [using conda](#using-conda)
-  - [using Docker](#using-docker-recommended) **recommended**
+  - [using Docker](#using-docker) **recommended**
 - [Datasets](#datasets)
   - [Data for Blending](#data-for-blending)
     - [3DBodyTex.v1 dataset](#download-3dbodytexv1-meshes)
@@ -158,6 +158,7 @@ All the datasets should be downloaded and placed in the `data` directory.
 <!-- #### The folder structure of data directory should be as follows: -->
 <details>
 
+  <a name="data_tree"></a>
   <summary> 
 
   ### The folder structure of data directory should be as follows: 
@@ -198,13 +199,16 @@ DermSynth3D/
 The datasets used in this work can be broadly categorized into data required for blending and data necessary for evaluation.
 
 <details>
-  <summary>
 
+  <a name="blend_data"></a>
+  <summary>
+  
   ### Data for Blending
 
   </summary> <blockquote>
   <!-- list of blending datasets -->
   <details> 
+  <a name="mesh_data"></a>
   <summary>
 
   ### Download 3DBodyTex.v1 meshes
@@ -230,7 +234,7 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 
   <details>
-
+  <a name="mesh_annot_data"></a>
   <summary>
   
   ### Download the 3DBodyTex.v1 annotations
@@ -247,30 +251,49 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 
   <details>
+  <a name="fitz17k_data"></a>
   <summary>
 
   ### Download the Fitzpatrick17k dataset
 
   </summary>
 
-  | _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
+  ![fitz_annot_fig](./assets/readme_fitz.png)
+  _An illustration showing lesions from the Fitzpatrick17k dataset in the top row, and it's corresponding manually segmented lesion annotation in the bottom row._
+  <!-- , and c) The lesion mask selected for blending._  -->
+  <!-- | _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
   |:-:|:-:|
-  |![image](./assets/juvenile-xanthogranuloma63.jpg) _A sample image from the `fitz17k` dataset._ | ![mask.](./data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png) _The manually segmented corresponding annotation showing 3 lesions._ |
-  |<p align=left> We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See their instructions to get access to the Fitzpatrick17k images. <br>We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).<br>After downloading the dataset, unzip the dataset:<br>```unzip fitzpatrick17k.zip -d data/fitzpatrick17k/```</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).</p>| <p align=left>We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). </p>|
+  |![image](./assets/juvenile-xanthogranuloma63.jpg) _A sample image from the `fitz17k` dataset._ | ![mask.](./data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png) _The manually segmented corresponding annotation showing 3 lesions._ | -->
+  <!-- |<p align=left> We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See their instructions to get access to the Fitzpatrick17k images. <br>We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).<br>After downloading the dataset, unzip the dataset:<br>```unzip fitzpatrick17k.zip -d data/fitzpatrick17k/```</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).</p>| <p align=left>We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). </p>| -->
+  We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k).
+   See their instructions to get access to the Fitzpatrick17k images.
+  We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).
+  
+  After downloading the dataset, unzip the dataset:
+  ```bash
+  unzip fitzpatrick17k.zip -d data/fitzpatrick17k/
+  ```
+  
+  We provide a few samples of the densely annotated lesion masks from the Fitzpatrick17k dataset within this repository under the `data` directory.
 
+  More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). 
+  
   </details>
 
   <details>
+  <a name="bg_data"></a>
   <summary>
 
   ### Download the Background Scenes
 
   </summary>
 
+  ![bg_scenes](./assets/readme_bg.png)
+  >_A few examples of the background scenes used for rendering the synthetic data._
+<!-- 
   |||
   |:-:|:-:|
-  |![scene1](./assets/50.jpg)|![scene2](./assets/700.jpg)|
-  >_A few examples of the background scenes used for rendering the synthetic data._
+  |![scene1](./assets/50.jpg)|![scene2](./assets/700.jpg)| -->
 
   Although you can use any scenes as background for generating the random views of the lesioned-meshes, we used [SceneNet RGB-D](https://robotvault.bitbucket.io/scenenet-rgbd.html) for the background IndoorScenes. Specifically, we used [this split](https://www.doc.ic.ac.uk/~bjm113/scenenet_data/train_split/train_0.tar.gz), and sampled 3000 images from it.
 
@@ -279,24 +302,26 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 </blockquote>
 </details>
-
 <details>
+<a name="train_data"></a>
 <summary>
 
 ### Data For Training 
 
 </summary> <blockquote>
   <details>
+  <a name="fu_data"></a>
   <summary>
 
    ### Download the FUSeg dataset
 
   </summary>
 
-  |||
+  ![fu_seg](./assets/fuseg.png)
+  >_A few examples from the FUSeg dataset showing the images in the top row and, it's corresponding segmentation mask in the bottom row._
+  <!-- |||
   |:-:|:-:|
-  |![scene1](./assets/0011.png)|![scene2](./assets/0011_m.png)|
-  >_An example image from the FUSeg dataset showing the images and it's corresponding segmentation mask._
+  |![scene1](./assets/0011.png)|![scene2](./assets/0011_m.png)| -->
   
   The Foot Ulcer Segmentation Challenge (FUSeg) dataset is available to download from [their official repository](https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge). 
   Download and unpack the dataset at `data/FUSeg/`, maintaining the Folder Structure shown above.
@@ -306,14 +331,15 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 
   <details>
+  <a name="prath_data"></a>
   <summary>
 
    ### Download the Pratheepan dataset
 
   </summary>
 
-  ![prath](./assets/prath.png)
-  >_An example image from the Pratheepan dataset showing the images and it's corresponding segmentation mask._
+  ![prath](./assets/readme_prath.png)
+  >_A few examples from the Pratheepan dataset showing the images and it's corresponding segmentation mask, in the top and bottom row respectively._
 
   The Pratheepan dataset is available to download from [their official website](https://web.fsktm.um.edu.my/~cschan/downloads_skin_dataset.html). 
   The images and the corresponding ground truth masks are available in a ZIP file hosted on Google Drive. Download and unpack the dataset at `data/Pratheepan_Dataset/`.
@@ -321,14 +347,15 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 
   <details>
+  <a name="ph2_data"></a>
   <summary>
   
    ### Download the PH2 dataset
 
   </summary>
 
-  ![ph2](./assets/ph2.png)
-  >_An example image from the PH2 dataset showing a lesion and it's corresponding segmentation mask._
+  ![ph2](./assets/readme_ph2.png)
+  >_A few examples from the PH2 dataset showing a lesion and it's corresponding segmentation mask, in the top and bottom row respectively._
   
   The PH2 dataset can be downloaded from [the official ADDI Project website](https://www.fc.up.pt/addi/ph2%20database.html). 
   Download and unpack the dataset at `data/ph2/`, maintaining the Folder Structure shown below.
@@ -336,20 +363,22 @@ The datasets used in this work can be broadly categorized into data required for
   </details>
 
   <details>
+  <a name="dermfit_data"></a>
   <summary>
 
    ### Download the DermoFit dataset
 
   </summary>
 
-  ![dermo](./assets/Example-images-for-the-different-skin-lesions-including-BCC-a-IEC-b-SCC-c-and_W640.jpg)
-  >_An example image from the DermoFit dataset showing different skin lesions._
+  ![dermo](./assets/readme_df.png)
+  >_An illustration of a few samples from the DermoFit dataset showing the skin lesions and it's corresponding binary mask, in the top and bottom row respectively._
 
   The DermoFit dataset is available through a paid perpetual academic license from the University of Edinburgh. Please access the dataset following the instructions for [the DermoFit Image Library](https://licensing.edinburgh-innovations.ed.ac.uk/product/dermofit-image-library) and unpack it at `data/dermofit/`, maintaining the Folder Structure shown above.
 
   </details>
 
   <details>
+  <a name="syn_data"></a>
   <summary>
 
    ###  Creating the Synthetic dataset
@@ -416,11 +445,24 @@ python -u scripts/gen_data.py --lr <learning rate> \
 
 Feel free to play around with other `random` parameter in `configs/blend.yaml` to control lighting, material and view points.
 
+<a name="post_proc_data"></a>
+
 ### Post-Process Renderings with Unity 
 
 We use Pytorch3D as our choice of differential renderer to generate synthetic data. 
 However, Pytorch3D is not a Physically Based Renderer (PBR) and hence, the renderings are not photorealistic or may not look photorealistic.
 To achieve photorealistic renderings, we use Unity to post-process the renderings obtained from Pytorch3D. 
+
+<details>
+<summary>
+
+###### Click to see the a visual comparison of the renderings obtained from Pytorch3D and Unity.
+
+</summary>
+
+![renderer_comp](./assets/media_rendComp.png)
+> _A visual comparison of the renderings obtained from Pytorch3D and Unity (Point Lights and Mixed Lighting)._
+</details>
 
 <span style="color:red">NOTE</span>: This is an optional step. If you are not interested in creating photorealistic renderings, you can skip this step and use the renderings obtained from Pytorch3D directly. We didn't observe a **significant** difference in the performance of the models trained on the renderings obtained from Pytorch3D and Unity.
 
@@ -429,7 +471,7 @@ To achieve photorealistic renderings, we use Unity to post-process the rendering
 <!-- ![synthetic data](./assets/fig_1-min.png) -->
 Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity.
 
-<a name='prep'></a>
+<a name='train_prep'></a>
 
 ## Preparing Dataset for Experiments
 <!-- 
@@ -510,6 +552,8 @@ python -u scripts/infer_multi_task.py
 For a quick overview for training lesion detection models, please have a look at [this notebook](./notebooks/train_detection.ipynb).
 
 For doing a quick inference using the pre-trained detection models/ checkpoints, have a look at [this notebook](./notebooks/inference_detection.ipynb).
+
+<a name="ack"></a>
 
 ## Acknowledgements
 
