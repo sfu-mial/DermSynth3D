@@ -68,7 +68,7 @@ DermSynth3D/
 ## Table of Contents
 - [Installation](#installation)
   - [using conda](#using-conda)
-  - [using Docker **recommended**](#using-docker-recommended)
+  - [using Docker](#using-docker-recommended) **recommended**
 - [Datasets](#datasets)
   - [Data for Blending](#data-for-blending)
     - [3DBodyTex.v1 dataset](#download-3dbodytexv1-meshes)
