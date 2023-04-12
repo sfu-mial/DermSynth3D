@@ -13,7 +13,7 @@ This is the official code repository following our work [DermSynth3D](#link-to-a
 A data generation pipeline for creating photorealistic _in-the-wild_  synthetic dermatalogical data with rich annotations such as semantic segmentation masks, depth maps, and bounding boxes for various skin analysis tasks.
 
 ![main pipeline](assets/pipeline.png) 
-_The figure shows the DermSynth3D computational pipeline where 2D segmented skin conditions are blended into the texture image of a 3D mesh on locations outside of the hair and clothing regions. After blending, 2D views of the mesh are rendered with a variety of camera viewpoints and lighting conditions and combined with background images to create a synthetic dermatology dataset._
+>_The figure shows the DermSynth3D computational pipeline where 2D segmented skin conditions are blended into the texture image of a 3D mesh on locations outside of the hair and clothing regions. After blending, 2D views of the mesh are rendered with a variety of camera viewpoints and lighting conditions and combined with background images to create a synthetic dermatology dataset._
 
 ## Motivation
 
@@ -64,32 +64,35 @@ DermSynth3D/
 ┣ scripts/                     # scripts for traning and evaluation
 ┗ skin3d/                      # external module
 ```
-- [DermSynth3D](#dermsynth3d)
-  - [TL;DR](#tldr)
-  - [Motivation](#motivation)
-  - [Repository layout](#repository-layout)
-  - [Table of contents](#table-of-contents)
-    - [Installation](#installation)
-      - [using conda](#using-conda)
-      - [using Docker](#using-docker)
-      - [NOTE](#note)
-  - [Datasets](#datasets)
-    - [The folder structure of data directory should be as follows:](#the-folder-structure-of-data-directory-should-be-as-follows)
-    - [Data for Blending](#data-for-blending)
-    - [Data For Training](#data-for-training)
-  - [How to Use $DermSynth3D$](#how-to-use-dermsynth3d)
-    - [Generating Synthetic Dataset](#generating-synthetic-dataset)
-      - [Post-Process Renderings with Unity](#post-process-renderings-with-unity)
-    - [Preparing Dataset for Experiments](#preparing-dataset-for-experiments)
-  - [Cite](#cite)
-  - [Demo Notebooks for Dermatology Tasks](#demo-notebooks-for-dermatology-tasks)
-    - [Lesion Segmentation](#lesion-segmentation)
-    - [Multi-Task Prediction](#multi-task-prediction)
-    - [Lesion Detection](#lesion-detection)
-  - [Acknowledgements](#acknowledgements)
 
-
+## Table of Contents
+- [Installation](#installation)
+  - [using conda](#using-conda)
+  - [using Docker **recommended**](#using-docker-recommended)
+- [Datasets](#datasets)
+  - [Data for Blending](#data-for-blending)
+    - [3DBodyTex.v1 dataset](#download-3dbodytexv1-meshes)
+    - [3DBodyTex.v1 annotations](#download-the-3dbodytexv1-annotations)
+    - [Fitzpatrick17k dataset](#download-the-fitzpatrick17k-dataset)
+    - [Background Scenes](#download-the-background-scenes)
+  - [Data For Training](#data-for-training)
+    - [FUSeg dataset](#download-the-fuseg-dataset)
+    - [Pratheepan dataset](#download-the-pratheepan-dataset)
+    - [PH2 dataset](#download-the-ph2-dataset)
+    - [DermoFit dataset](#download-the-dermofit-dataset)
+  - [Creating the Synthetic dataset](#creating-the-synthetic-dataset)
+- [How to Use DermSynth3D](#how-to-use-dermsynth3d)
+  - [Generating Synthetic Dataset](#generating-synthetic-dataset)
+  - [Post-Process Renderings with Unity](#post-process-renderings-with-unity)
+- [Preparing Dataset for Experiments](#preparing-dataset-for-experiments)
+- [Cite](#cite)
+- [Demo Notebooks for Dermatology Tasks](#demo-notebooks-for-dermatology-tasks)
+  - [Lesion Segmentation](#lesion-segmentation)
+  - [Multi-Task Prediction](#multi-task-prediction)
+  - [Lesion Detection](#lesion-detection)
+<!-- 
 ## Table of contents
+
 - [Installation](#installation)
   - [using conda](#using-conda)
   - [using Docker](#using-docker) **recommended**
@@ -101,7 +104,7 @@ DermSynth3D/
 - [Demo Notebooks for Dermatology Tasks](#demo-notebooks-for-dermatology-tasks)
   - [Lesion Segmentation](#lesion-segmentation)
   - [Multi-Task Prediction](#multi-task-prediction)
-  - [Lesion Detection](#lesion-detection)
+  - [Lesion Detection](#lesion-detection) -->
 
 <a name="installation"></a>
 
@@ -120,7 +123,7 @@ conda activate dermsynth3d
 
 <a name="docker"></a>
 
-#### using Docker
+#### using Docker <span>**recommended**</span>
 
 ```bash
 # Build the container in the root dir
@@ -138,9 +141,7 @@ docker pull sinashish/dermsynth3d:latest
 docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
 
-#### <span style="color: red">NOTE</span>
-
-The code has been tested on Ubuntu 20.04 with CUDA 11.1, python 3.8, pytorch 1.10.0, and pytorch3d 0.7.2, and we don't know if it will work on CPU.
+<span style="color: red">NOTE:</span> The code has been tested on Ubuntu 20.04 with CUDA 11.1, python 3.8, pytorch 1.10.0, and pytorch3d 0.7.2, and we don't know if it will work on CPU.
 
 If you face any issues installing pytorch3d, please refer to their [installation guide](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md) or this issue [link](https://github.com/facebookresearch/pytorch3d/issues/1076).
 
@@ -207,12 +208,15 @@ The datasets used in this work can be broadly categorized into data required for
   <details> 
   <summary>
 
-  - ### Download 3DBodyTex.v1 meshes
+  ### Download 3DBodyTex.v1 meshes
 
   </summary>
 
-  <img align="right" src = "assets/scans_blurred.png" width="224px" height="224px" ></img> 
-  <!-- ![3dbodytex sample](assets/scans_blurred.png) -->
+  ![3dbodytex sample](assets/scans_blurred.png)
+  > _A few examples of raw 3D scans in sports-clothing from the 3DBodyTex.v1 dataset showing a wide range of body shapes, pose, skin-tone, and gender._
+  <!-- <img align="right" src = "assets/scans_blurred.png" width="224px" height="224px" ></img> -->
+
+
   The `3DBodyTex.v1` dataset can be downloaded from [here](https://cvi2.uni.lu/datasets/).
 
   `3DBodyTex.v1` contains the meshes and texture images used in this work and can be downloaded from the external site linked above (after accepting a license agreement). 
@@ -230,14 +234,14 @@ The datasets used in this work can be broadly categorized into data required for
 
   <summary>
   
-  - ### Download the 3DBodyTex.v1 annotations
+  ### Download the 3DBodyTex.v1 annotations
 
   </summary>
 
   | _Non-skin texture maps_ | _Anatomy labels_ |
   |:-:|:-:|
   |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://vault.sfu.ca/index.php/s/s8Sy7JdA74r1GN9). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://vault.sfu.ca/index.php/s/TLLqxCs7MVhS117). </p>|
-  |<img src="./assets/final.png" width="320" height="240" align=center>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=center>|
+  |<img src="./assets/final.png" width="320" height="240" align=center><p>_A sample texture image showing the annotations for non-skin regions._ </p>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=center> <p>_A few examples of the scans showing the 7 anatomy labels._ </p>|
 
   The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
 
@@ -246,13 +250,13 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Download the Fitzpatrick17k dataset
+  ### Download the Fitzpatrick17k dataset
 
   </summary>
 
   | _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
   |:-:|:-:|
-  |![image](./assets/juvenile-xanthogranuloma63.jpg) | ![mask.](./data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png)|
+  |![image](./assets/juvenile-xanthogranuloma63.jpg) _A sample image from the `fitz17k` dataset._ | ![mask.](./data/fitzpatrick17k/annotations/test/01ed6482ab261012f398c19db7dfcc6c/lesions.png) _The manually segmented corresponding annotation showing 3 lesions._ |
   |<p align=left> We used the skin conditions from [Fitzpatrick17k](https://github.com/mattgroh/fitzpatrick17k). See their instructions to get access to the Fitzpatrick17k images. <br>We provide the raw images for the Fitzpatrick17k dataset [here](https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX).<br>After downloading the dataset, unzip the dataset:<br>```unzip fitzpatrick17k.zip -d data/fitzpatrick17k/```</p>| <p align=left> We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS).</p>| <p align=left>We provide the densely annotated lesion masks from the Fitzpatrick17k dataset are given within this repository under the `data` directory. More of such annotations can be downloaded from [here](https://vault.sfu.ca/index.php/s/gemdbCeoZXoCqlS). </p>|
 
   </details>
@@ -260,13 +264,14 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Download the Background Scenes
+  ### Download the Background Scenes
 
   </summary>
 
   |||
   |:-:|:-:|
   |![scene1](./assets/50.jpg)|![scene2](./assets/700.jpg)|
+  >_A few examples of the background scenes used for rendering the synthetic data._
 
   Although you can use any scenes as background for generating the random views of the lesioned-meshes, we used [SceneNet RGB-D](https://robotvault.bitbucket.io/scenenet-rgbd.html) for the background IndoorScenes. Specifically, we used [this split](https://www.doc.ic.ac.uk/~bjm113/scenenet_data/train_split/train_0.tar.gz), and sampled 3000 images from it.
 
@@ -285,14 +290,15 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Download the FUSeg dataset
+   ### Download the FUSeg dataset
 
   </summary>
 
   |||
   |:-:|:-:|
   |![scene1](./assets/0011.png)|![scene2](./assets/0011_m.png)|
-
+  >_An example image from the FUSeg dataset showing the images and it's corresponding segmentation mask._
+  
   The Foot Ulcer Segmentation Challenge (FUSeg) dataset is available to download from [their official repository](https://github.com/uwm-bigdata/wound-segmentation/tree/master/data/Foot%20Ulcer%20Segmentation%20Challenge). 
   Download and unpack the dataset at `data/FUSeg/`, maintaining the Folder Structure shown above.
 
@@ -303,11 +309,12 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Download the Pratheepan dataset
+   ### Download the Pratheepan dataset
 
   </summary>
 
   ![prath](./assets/prath.png)
+  >_An example image from the Pratheepan dataset showing the images and it's corresponding segmentation mask._
 
   The Pratheepan dataset is available to download from [their official website](https://web.fsktm.um.edu.my/~cschan/downloads_skin_dataset.html). 
   The images and the corresponding ground truth masks are available in a ZIP file hosted on Google Drive. Download and unpack the dataset at `data/Pratheepan_Dataset/`.
@@ -317,12 +324,13 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
   
-  - ### Download the PH2 dataset
+   ### Download the PH2 dataset
 
   </summary>
 
   ![ph2](./assets/ph2.png)
-
+  >_An example image from the PH2 dataset showing a lesion and it's corresponding segmentation mask._
+  
   The PH2 dataset can be downloaded from [the official ADDI Project website](https://www.fc.up.pt/addi/ph2%20database.html). 
   Download and unpack the dataset at `data/ph2/`, maintaining the Folder Structure shown below.
 
@@ -331,13 +339,12 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Download the DermoFit dataset
+   ### Download the DermoFit dataset
 
   </summary>
 
   ![dermo](./assets/Example-images-for-the-different-skin-lesions-including-BCC-a-IEC-b-SCC-c-and_W640.jpg)
-
-  _An example image from the DermoFit dataset showing different skin lesions._
+  >_An example image from the DermoFit dataset showing different skin lesions._
 
   The DermoFit dataset is available through a paid perpetual academic license from the University of Edinburgh. Please access the dataset following the instructions for [the DermoFit Image Library](https://licensing.edinburgh-innovations.ed.ac.uk/product/dermofit-image-library) and unpack it at `data/dermofit/`, maintaining the Folder Structure shown above.
 
@@ -346,12 +353,15 @@ The datasets used in this work can be broadly categorized into data required for
   <details>
   <summary>
 
-  - ### Creating the Synthetic dataset
+   ###  Creating the Synthetic dataset
 
   </summary>
     
-  ![annots](./assets/AnnotationOverview.png)
-    _A few examples of annotated data synthesized using DermSynth3D. The rows from top to bottom show respectively: the rendered images with blended skin conditions, bounding boxes around the lesions, GT semantic segmentation masks, grouped anatomical labels, and the monocular depth maps produced by the renderer._
+  ![synthetic data](./assets/fig_1-min.png)
+  >_Generated synthetic images of multiple subjects across a range of skin tones in various skin conditions, background scene, lighting, and viewpoints._
+
+  <!-- ![annots](./assets/AnnotationOverview.png)
+   > _A few examples of annotated data synthesized using DermSynth3D. The rows from top to bottom show respectively: the rendered images with blended skin conditions, bounding boxes around the lesions, GT semantic segmentation masks, grouped anatomical labels, and the monocular depth maps produced by the renderer._ -->
   For convenience, we provide the generated synthetic data we used in this work for various downstream tasks [here](https://vault.sfu.ca/index.php/s/mF2NVawbvvbW9lU).
 
   If you want to train your models on a different split of the synthetic data, you can download a dataset generated by blending lesions on 26 3DBodyTex scans from [here](https://vault.sfu.ca/index.php/s/rBTjTRaxTLrnqiE).
@@ -371,20 +381,31 @@ The datasets used in this work can be broadly categorized into data required for
 
 <a name='gen'></a>
 
-### Generating Synthetic Dataset
-![annotated data](assets/AnnotationOverview.png)
+### Generating Synthetic Dataset 
 
-Before running any code, make sure that you have downloaded the data necessary for blending as mentioned in [datasets](#datasets) and folder structure is as described above.
-If the folder structure is different, then please update the paths accordingly in `configs/blend.yaml`.
+![annots](./assets/AnnotationOverview.png)
+  > _A few examples of annotated data synthesized using DermSynth3D. The rows from top to bottom show respectively: the rendered images with blended skin conditions, bounding boxes around the lesions, GT semantic segmentation masks, grouped anatomical labels, and the monocular depth maps produced by the renderer._
 
-Now, to generate the synthetic data with the default parameters, simply run the following command to generate 2000 views for a specified mesh:
+Before running any code to synthesize a densely annotated data as shown above, make sure that you have downloaded the data necessary for blending as mentioned in [datasets](#data-for-blending) and folder structure is as described above.
+If your folder structure is different from ours, then update the paths $-$ such as `bodytex_dir`, `annot_dir`, etc.$-$ accordingly in `configs/blend.yaml`.
+
+<!-- ```yml
+bodytex_dir: './data/3dbodytex-1.1-highres/' # Name of the mesh to blend
+mesh_name: '006-f-run'                       # Path to FitzPatrick17k lesions
+fitz_dir: './data/fitzpatrick17k/data/finalfitz17k/' # Path to annotated Fitz17k lesions with masks
+annot_dir: './data/annotations/' # Path to save the new texture maps
+tex_dir: './data/lesions/' 
+``` -->
+
+Now, to *generate* the synthetic data with the default parameters, simply run the following command to generate 2000 views for a specified mesh:
 
 ```bash
 python -u scripts/gen_data.py
 ```
 
-To change any blending or synthesis parameters only, run using:
+To change the blending or synthesis parameters only, run using:
 ```bash
+# Use python scripts/gen_data.py -h for full list of arguments
 python -u scripts/gen_data.py --lr <learning rate> \ 
             -m <mesh_name> \
             -s <path to save the views> \
@@ -393,20 +414,33 @@ python -u scripts/gen_data.py --lr <learning rate> \
             -v <number of views> \
             -n <number of lesions per mesh> 
 ```
-Feel free to play around with `random` parameter in `configs/blend.yaml` to control lighting, material and view points.
 
-#### Post-Process Renderings with Unity
-![synthetic data](./assets/fig_1-min.png)
+Feel free to play around with other `random` parameter in `configs/blend.yaml` to control lighting, material and view points.
+
+### Post-Process Renderings with Unity 
+
+We use Pytorch3D as our choice of differential renderer to generate synthetic data. 
+However, Pytorch3D is not a Physically Based Renderer (PBR) and hence, the renderings are not photorealistic or may not look photorealistic.
+To achieve photorealistic renderings, we use Unity to post-process the renderings obtained from Pytorch3D. 
+
+<span style="color:red">NOTE</span>: This is an optional step. If you are not interested in creating photorealistic renderings, you can skip this step and use the renderings obtained from Pytorch3D directly. We didn't observe a **significant** difference in the performance of the models trained on the renderings obtained from Pytorch3D and Unity.
+
+<!-- We provide detailed instructions to post-process the renderings obtained in the previous step to achieve _photorealistic_ renderings using Unity. -->
+
+<!-- ![synthetic data](./assets/fig_1-min.png) -->
 Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity.
 
 <a name='prep'></a>
 
-### Preparing Dataset for Experiments
+## Preparing Dataset for Experiments
+<!-- 
+![synthetic data](./assets/fig_1-min.png)
+>_Generated synthetic images of multiple subjects across a range of skin tones in various skin conditions, background scene, lighting, and viewpoints._ -->
 
-After creating the syntheic dataset in the previous step, it is now the time to test the utility of the dataset on some real world tasks.
+After creating the syntheic dataset in the previous step, it is now the time to evaluate the utility of the dataset on some real-world tasks.
 
-Before, you start with any experiments, ideally you would want to organize the generated data into `train/val/test` sets. 
-We provide a script to do the same:
+Before, you start with any experiments, ideally you would want to organize the generated data into `train/val/test` sets.
+We provide a utility script to do the same:
 ```bash
 python scripts/prep_data.py
 ```
@@ -431,6 +465,7 @@ If you find this work useful or use any part of the code in this repo, please ci
 ## Demo Notebooks for Dermatology Tasks
 
 ![Qualitative Results](./assets/results.png)
+>_Qualitative results for (a) foot ulcer bounding box detection on FUSeg dataset, (b) multi-class segmentation (lesions,skin, and background) and in-the-wild body part prediction, \(c\) skin segmentation and body part prediction on Pratheepan dataset, and (d) multi-class segmentation (lesions, skin, and background) on dermoscopy images from PH2 dataset._
 
 <a name='seg'></a>
 <a name='train'></a>
