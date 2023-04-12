@@ -68,7 +68,7 @@ DermSynth3D/
 ## Table of Contents
 - [Installation](#installation)
   - [using conda](#using-conda)
-  - [using Docker **recommended**](#using-docker-recommended)
+  - [using Docker](#using-docker-recommended) **recommended**
 - [Datasets](#datasets)
   - [Data for Blending](#data-for-blending)
     - [3DBodyTex.v1 dataset](#download-3dbodytexv1-meshes)
@@ -123,13 +123,13 @@ conda activate dermsynth3d
 
 <a name="docker"></a>
 
-#### using Docker <span>**recommended**</span>
+#### using Docker
 
 ```bash
 # Build the container in the root dir
 docker build -t dermsynth3d --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f Dockerfile .
 # Run the container in interactive mode for using DermSynth3D
-# See 3. Usage
+# See 3. How to use DermSynth3D 
 docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
 We provide the [pre-built docker image](https://hub.docker.com/r/sinashish/dermsynth3d), which can be be used as well:
@@ -166,44 +166,43 @@ All the datasets should be downloaded and placed in the `data` directory.
 
 ```bash
 DermSynth3D/
-┣ ...						   		# other source code
-┣ data/                        		# directory to store the data
+┣ ...						   		          # other source code
+┣ data/                        	# directory to store the data
 ┃  ┣ 3dbodytex-1.1-highres   		# data for 3DBodyTex.v1 3d models and texture maps
 ┃  ┣ fitzpatrick17k/
 ┃  ┃  ┣ data/               		# Fitzpatrick17k images
 ┃  ┃  ┗ annotations/        		# annotations for Fitzpatrick17k lesions
 ┃  ┣ ph2/                   
-┃  ┃  ┣ images/               		# PH2 images
-┃  ┃  ┗ labels/               		# PH2 annotations
-┃  ┣ dermofit/ 						# Dermofit dataset
-┃  ┃  ┣ images/               		# Dermofit images	
-┃  ┃  ┗ targets/               		# Dermofit annotations 
+┃  ┃  ┣ images/               	# PH2 images
+┃  ┃  ┗ labels/               	# PH2 annotations
+┃  ┣ dermofit/ 						      # Dermofit dataset
+┃  ┃  ┣ images/               	# Dermofit images	
+┃  ┃  ┗ targets/               	# Dermofit annotations 
 ┃  ┣ FUSeg/
 ┃  ┃  ┣ train/               		# training set with images/labels for FUSeg
-┃  ┃  ┣ validation/               	# val set with images/labels for FUSeg
+┃  ┃  ┣ validation/             # val set with images/labels for FUSeg
 ┃  ┃  ┗ test/               		# test set with images/labels for FUSeg
 ┃  ┣ Pratheepan_Dataset/
-┃  ┃  ┣ FacePhoto/               	# images from Pratheepan dataset
+┃  ┃  ┣ FacePhoto/              # images from Pratheepan dataset
 ┃  ┃  ┗ GroundT_FacePhoto/  	 	# annotations
-┃  ┣ lesions/                   	# keep the non-skin masks for 3DBodyTex.v1 meshes here
-┃  ┣ annotations/                   # segmentation masks for Annotated Fitzpatrick17k lesions
+┃  ┣ lesions/                   # keep the non-skin masks for 3DBodyTex.v1 meshes here
+┃  ┣ annotations/               # segmentation masks for Annotated Fitzpatrick17k lesions
 ┃  ┣ bodytex_anatomy_labels/ 		# per-vertex labels for anatomy of 3DBodyTex.v1 meshes
-┃  ┣ background/               		# keep the background scenes for rendering here
-┃  ┗ synth_data/			   		# the generated synthetic data will be stored here
+┃  ┣ background/               	# keep the background scenes for rendering here
+┃  ┗ synth_data/			   		    # the generated synthetic data will be stored here
     	┣ train/               		# training set with images/labels for training on synthetic data
-	    ┣ <val/test>/ 			 	# val and test set with images/labels for training on synthetic data
+	    ┣ <val/test>/ 			 	    # val and test set with images/labels for training on synthetic data
 ```
-
 </details>
 
 The datasets used in this work can be broadly categorized into data required for blending and data necessary for evaluation.
 
-<details> 
+<details>
   <summary>
 
   ### Data for Blending
 
-  </summary>
+  </summary> <blockquote>
   <!-- list of blending datasets -->
   <details> 
   <summary>
@@ -278,7 +277,7 @@ The datasets used in this work can be broadly categorized into data required for
   For convenience, the background scenes we used to generate the ssynthetic dataset can be downloaded from [here](https://vault.sfu.ca/index.php/s/r7nc1QHKwgW2FDk).
 
   </details>
-
+</blockquote>
 </details>
 
 <details>
@@ -286,7 +285,7 @@ The datasets used in this work can be broadly categorized into data required for
 
 ### Data For Training 
 
-</summary>
+</summary> <blockquote>
   <details>
   <summary>
 
@@ -372,7 +371,7 @@ The datasets used in this work can be broadly categorized into data required for
   Even better, you can generate your own dataset, by following the instructions [here](./README.md#generating-synthetic-dataset).
 
   </details>
-
+  </blockquote>
 </details>
 
 <a name="usage"></a>
@@ -481,10 +480,10 @@ python -u scripts/train_mix_seg.py
 
 Play around with the following parameters for a combinatorial mix of datasets.
 ```yaml
-    real_ratio: 0.5                 # fraction of real images to be used from real dataset
-    real_batch_ratio: 0.5           # fraction of real samples in each batch
-    pretrain: True                  # use pretrained DeepLabV3 weights
-    mode: 1.0                       # Fraction of the number of synthetic images to be used for training
+real_ratio: 0.5                 # fraction of real images to be used from real dataset
+real_batch_ratio: 0.5           # fraction of real samples in each batch
+pretrain: True                  # use pretrained DeepLabV3 weights
+mode: 1.0                       # Fraction of the number of synthetic images to be used for training
 ```
 
 You can also look at [this notebook](./notebooks/train_segmentation.ipynb) for a quick overview for training lesion segmention model.
