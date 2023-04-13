@@ -220,7 +220,7 @@ The datasets used in this work can be broadly categorized into data required for
   <!-- <img align="right" src = "assets/scans_blurred.png" width="224px" height="224px" ></img> -->
 
 
-  The `3DBodyTex.v1` dataset can be downloaded from [here](https://cvi2.uni.lu/datasets/).
+  The `3DBodyTex.v1` dataset can be downloaded from [here](https://cvi2.uni.lu/3dbodytexv1/).
 
   `3DBodyTex.v1` contains the meshes and texture images used in this work and can be downloaded from the external site linked above (after accepting a license agreement). 
 
@@ -243,7 +243,7 @@ The datasets used in this work can be broadly categorized into data required for
 
   | _Non-skin texture maps_ | _Anatomy labels_ |
   |:-:|:-:|
-  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://vault.sfu.ca/index.php/s/s8Sy7JdA74r1GN9). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://vault.sfu.ca/index.php/s/TLLqxCs7MVhS117). </p>|
+  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://uniluxembourg.sharepoint.com/:f:/r/sites/msteams_1a4883-3DBodyTex/Shared%20Documents/3DBodyTex/3DBodyTex.DermSynth/bodytex_non_skin_masks?csf=1&web=1&e=tB33tN). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://uniluxembourg.sharepoint.com/:f:/r/sites/msteams_1a4883-3DBodyTex/Shared%20Documents/3DBodyTex/3DBodyTex.DermSynth/bodytex_anatomy_labels?csf=1&web=1&e=8cCSXO). </p>|
   |<img src="./assets/final.png" width="320" height="240" align=center><p>_A sample texture image showing the annotations for non-skin regions._ </p>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=center> <p>_A few examples of the scans showing the 7 anatomy labels._ </p>|
 
   The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
