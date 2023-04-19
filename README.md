@@ -244,12 +244,12 @@ The datasets used in this work can be broadly categorized into data required for
 
   | _Non-skin texture maps_ | _Anatomy labels_ |
   |:-:|:-:|
-  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://uniluxembourg.sharepoint.com/:f:/r/sites/msteams_1a4883-3DBodyTex/Shared%20Documents/3DBodyTex/3DBodyTex.DermSynth/bodytex_non_skin_masks?csf=1&web=1&e=tB33tN). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://uniluxembourg.sharepoint.com/:f:/r/sites/msteams_1a4883-3DBodyTex/Shared%20Documents/3DBodyTex/3DBodyTex.DermSynth/bodytex_anatomy_labels?csf=1&web=1&e=8cCSXO). </p>|
+  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/Eg6ClX4ItEtKh18N5upNLjcB7oGWbrNeI4y_02ebI2lHaA). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/Eq9G_AtjNjFJpxK7AuewuA4BV7FAf0Z0HjH1mMD9UNT2LA). </p>|
   |<img src="./assets/final.png" width="320" height="240" align=center><p>_A sample texture image showing the annotations for non-skin regions._ </p>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=center> <p>_A few examples of the scans showing the 7 anatomy labels._ </p>|
 
   The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
 
-  *Note*: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link]().
+  *Note*: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexv1/).
 
   </details>
 
