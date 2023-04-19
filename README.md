@@ -249,7 +249,7 @@ The datasets used in this work can be broadly categorized into data required for
 
   The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
 
-  *Note*: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexv1/).
+  *Note*: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexdermsynth/).
 
   </details>
 
