@@ -476,7 +476,7 @@ To achieve photorealistic renderings, we use Unity to post-process the rendering
 <!-- We provide detailed instructions to post-process the renderings obtained in the previous step to achieve _photorealistic_ renderings using Unity. -->
 
 <!-- ![synthetic data](./assets/fig_1-min.png) -->
-Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity.
+Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity. Alternatively, download the renders that we created using Unity [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/EpkjOSV5aQNDkzQ7c0zFnqEBuQDBqIOjw_CehKIYI9cnvQ).
 
 <a name='train_prep'></a>
 
