@@ -3,8 +3,7 @@
 ![GPLv3](https://img.shields.io/static/v1.svg?label=📃%20License&message=GPL%20v3.0&color=green)
 [![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=N/A&color=red)](#) 
 [![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=N/A&color=orange)](#) 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Copyright](https://img.shields.io/static/v1.svg?label=DermSynth3D%20©️%20&message=%202023&labelColor=green&color=blue) 
+[![request dataset](https://img.shields.io/static/v1.svg?label=Dataset&message=Request%20Dataset&style=flat&color=blueviolet)](https://cvi2.uni.lu/3dbodytexdermsynth/)
 
 This is the official code repository following our work [DermSynth3D](#link-to-arxiv).
 
@@ -26,22 +25,6 @@ Our method adheres to top-down rules that constrain the blending and rendering p
 The framework generates photo-realistic 2D dermoscopy images and the corresponding dense annotations for semantic segmentation of the skin, skin conditions, body parts, bounding boxes around lesions, depth maps, and other 3D scene parameters, such as camera position and lighting conditions.
 ${DermSynth3D}$ allows for the creation of custom datasets for various dermatology tasks.
 
-<!-- Existing datasets for dermatological image analysis have significant limitations, including a small number of image samples, limited disease conditions, insufficient annotations, and non-standardized image acquisitions.
-To address this problem, we propose **DermSynth3D**, or generating synthetic 2D skin image datasets using 3D human body meshes blended with skin disorders from clinical images.
-Our approach uses a differentiable renderer to blend the skin lesions within the texture image of the 3D human body and generates 2D views along with corresponding annotations, including semantic segmentation masks for skin conditions, healthy skin, non-skin regions, and anatomical regions. 
-Moreover, we include a diverse range of skin tones and background scenes, that enables us to generate semantically rich and meaningful labels for 2D _in-the-wild_ clinical images that can be used for a variety of dermatological tasks, as opposed to just one. -->
-
-<!-- We present a novel framework called **DermSynth3D** that blends skin disease patterns onto 3D textured meshes of human subjects using a differentiable renderer and generates 2D images from various camera viewpoints under chosen lighting conditions in diverse background scenes. -->
-
-<!-- The 2D dermatological images generated using DermSynth3D are:
-- meaningful _i.e._ anatomically relevant
-- mimic _in-the-wild_ acquistions
-- photo-realistic
-- densely annotated with
-  - Semantic segmentation labels of healthy skin, skin-condition, and human anatomy
-  - Bounding boxes around skin-condition
-  - Depth maps
-  - 3D scene parameters, such as camera position and lightning conditions -->
 
 ## Repository layout
 
@@ -90,21 +73,6 @@ DermSynth3D/
   - [Lesion Segmentation](#lesion-segmentation)
   - [Multi-Task Prediction](#multi-task-prediction)
   - [Lesion Detection](#lesion-detection)
-<!-- 
-## Table of contents
-
-- [Installation](#installation)
-  - [using conda](#using-conda)
-  - [using Docker](#using-docker) **recommended**
-- [Datasets](#datasets)
-- [Usage](#usage)
-  - [Generating Synthetic Dataset](#generating-synthetic-dataset)
-  - [Preparing Dataset for Experiments](#preparing-dataset-for-experiments)
-- [Cite](#cite)
-- [Demo Notebooks for Dermatology Tasks](#demo-notebooks-for-dermatology-tasks)
-  - [Lesion Segmentation](#lesion-segmentation)
-  - [Multi-Task Prediction](#multi-task-prediction)
-  - [Lesion Detection](#lesion-detection) -->
 
 <a name="installation"></a>
 
@@ -141,7 +109,7 @@ docker pull sinashish/dermsynth3d:latest
 docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
 
-<span style="color: red">NOTE:</span> The code has been tested on Ubuntu 20.04 with CUDA 11.1, python 3.8, pytorch 1.10.0, and pytorch3d 0.7.2, and we don't know if it will work on CPU.
+<span style="color: red">**NOTE**:</span> The code has been tested on Ubuntu 20.04 with CUDA 11.1, python 3.8, pytorch 1.10.0, and pytorch3d 0.7.2, and we don't know if it will work on CPU.
 
 If you face any issues installing pytorch3d, please refer to their [installation guide](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md) or this issue [link](https://github.com/facebookresearch/pytorch3d/issues/1076).
 
@@ -244,12 +212,12 @@ The datasets used in this work can be broadly categorized into data required for
 
   | _Non-skin texture maps_ | _Anatomy labels_ |
   |:-:|:-:|
-  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/Eg6ClX4ItEtKh18N5upNLjcB7oGWbrNeI4y_02ebI2lHaA). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/Eq9G_AtjNjFJpxK7AuewuA4BV7FAf0Z0HjH1mMD9UNT2LA). </p>|
+  |<p align=left> We provide the non-skin texture map ($T_{nonskin}$) annotations for 215 meshes from the `3DBodyTex.v1` dataset [here](https://cvi2.uni.lu/3dbodytexdermsynth/). </p> | <p align=left> We provide the per-vertex labels for anatomical parts of the 3DBodyTex.v1 meshes obtained by fitting SCAPE template body model [here](https://cvi2.uni.lu/3dbodytexdermsynth/). </p>|
   |<img src="./assets/final.png" width="320" height="240" align=center><p>_A sample texture image showing the annotations for non-skin regions._ </p>|<img src="./assets/body_part_annotation_consistent_cmap_multi.png"  width="320" height="240"  align=center> <p>_A few examples of the scans showing the 7 anatomy labels._ </p>|
 
   The folders are organised with the same IDs as the meshes in `3DBodyTex.v1` dataset.
 
-  *Note*: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexdermsynth/).
+  **NOTE**: To download the the 3DBodyTex.v1 annotations with the links referred above, you would need to request access to the 3DBodyTex.DermSynth dataset by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexdermsynth/).
 
   </details>
 
@@ -261,7 +229,7 @@ The datasets used in this work can be broadly categorized into data required for
 
   </summary>
 
-  ![fitz_annot_fig](./assets/readme_fitz.png)
+  ![fitz_annot_fig](./assets/readme_fitz.png)<br>
   _An illustration showing lesions from the Fitzpatrick17k dataset in the top row, and it's corresponding manually segmented lesion annotation in the bottom row._
   <!-- , and c) The lesion mask selected for blending._  -->
   <!-- | _Fitzpatrick17k Images_| _Fitzpatrick17k annotations_|
@@ -393,12 +361,12 @@ The datasets used in this work can be broadly categorized into data required for
 
   <!-- ![annots](./assets/AnnotationOverview.png)
    > _A few examples of annotated data synthesized using DermSynth3D. The rows from top to bottom show respectively: the rendered images with blended skin conditions, bounding boxes around the lesions, GT semantic segmentation masks, grouped anatomical labels, and the monocular depth maps produced by the renderer._ -->
-  For convenience, we provide the generated synthetic data we used in this work for various downstream tasks [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/EpGkL2uMvptGvuLiVYR3BAoBzYQnf5GzhrmSHWwdF48O6w).
+  For convenience, we provide the generated synthetic data we used in this work for various downstream tasks [here](https://cvi2.uni.lu/3dbodytexdermsynth/).
 
-  If you want to train your models on a different split of the synthetic data, you can download a dataset generated by blending lesions on 26 3DBodyTex scans from [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/En13c-UJWOREt2PHYr6dWSsBcW1vFlR10mpghLNg4AuUjw).
+  If you want to train your models on a different split of the synthetic data, you can download a dataset generated by blending lesions on 26 3DBodyTex scans from [here](https://cvi2.uni.lu/3dbodytexdermsynth/).
   To prepare the synthetic dataset for training. Sample the `images`, and `targets` from the path where you saved this dataset and then organise them into `train/val`.
 	  
-  *Note*: To download the synthetic 3DBodyTex.DermSynth dataset referred in the links above, you would need to request access by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexdermsynth/).
+  **NOTE**: To download the synthetic 3DBodyTex.DermSynth dataset referred in the links above, you would need to request access by following the instructions on this [link](https://cvi2.uni.lu/3dbodytexdermsynth/).
 
   Alternatively, you can use the provided script `scripts/prep_data.py` to create it.
 
@@ -422,7 +390,7 @@ The datasets used in this work can be broadly categorized into data required for
   > _A few examples of annotated data synthesized using DermSynth3D. The rows from top to bottom show respectively: the rendered images with blended skin conditions, bounding boxes around the lesions, GT semantic segmentation masks, grouped anatomical labels, and the monocular depth maps produced by the renderer._
 
 Before running any code to synthesize a densely annotated data as shown above, make sure that you have downloaded the data necessary for blending as mentioned in [datasets](#data-for-blending) and folder structure is as described above.
-If your folder structure is different from ours, then update the paths $-$ such as `bodytex_dir`, `annot_dir`, etc.$-$ accordingly in `configs/blend.yaml`.
+If your folder structure is different from ours, then update the paths, such as `bodytex_dir`, `annot_dir`, etc., accordingly in `configs/blend.yaml`.
 
 <!-- ```yml
 bodytex_dir: './data/3dbodytex-1.1-highres/' # Name of the mesh to blend
@@ -476,7 +444,7 @@ To achieve photorealistic renderings, we use Unity to post-process the rendering
 <!-- We provide detailed instructions to post-process the renderings obtained in the previous step to achieve _photorealistic_ renderings using Unity. -->
 
 <!-- ![synthetic data](./assets/fig_1-min.png) -->
-Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity. Alternatively, download the renders that we created using Unity [here](https://uniluxembourg.sharepoint.com/:f:/s/msteams_1a4883-3DBodyTex/EpkjOSV5aQNDkzQ7c0zFnqEBuQDBqIOjw_CehKIYI9cnvQ).
+Follow the detailed instructions outlined [here](./docs/unity.md) to create photorealistic renderings using Unity. Alternatively, download the renders that we created using Unity [here](https://cvi2.uni.lu/3dbodytexdermsynth/).
 
 <a name='train_prep'></a>
 
@@ -500,9 +468,9 @@ You can look at `scripts/prep_data.py` for more details.
 ## Cite
 If you find this work useful or use any part of the code in this repo, please cite our paper:
 ```bibtext
-@unpublished{kawahara2023ds3d,
+@unpublished{sinha2023ds,
   title={DermSynth3D: Synthesis of in-the-wild annotated dermatology images},
-  author={Kawahara, Jeremy\textsuperscript{*}\textsuperscript{1} and Sinha, Ashish\textsuperscript{*}\textsuperscript{1} and Pakzad, Arezou\textsuperscript{1} and Abhishek, Kumar and Ruthven, Matthieu and Baratab, Enjie and Kacem, Anis and Aouada, Djamila and Hamarneh, Ghassan},
+  author={Sinha, Ashish\textsuperscript{*}\textsuperscript{1} and Kawahara, Jeremy\textsuperscript{*}\textsuperscript{1} and Pakzad, Arezou\textsuperscript{1} and Abhishek, Kumar and Ruthven, Matthieu and Baratab, Enjie and Kacem, Anis and Aouada, Djamila and Hamarneh, Ghassan},
   year={2023},
   note={Preprint. Currently under review.},
 }
