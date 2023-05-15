@@ -1,0 +1,33 @@
+name: Renderer params
+
+fov: 30
+faces_per_pixel: 1
+
+# Specific Light Source properties
+light:
+  ambient_color: (0.5, 0.5, 0.5)
+  specular_color: (0.025, 0.025, 0.025)
+  diffuse_color: (0.5, 0.5, 0.5)
+  light_location: None
+
+# Specific Material Properties
+material: 
+  ambient_color: (0.5, 0.5, 0.5)
+  specular_color: (0.025, 0.025, 0.025)
+  diffuse_color: (0.5, 0.5, 0.5)
+  shininess: 50.
+
+# Range for randomizing views/light/material
+random:
+  dists: (0.3, 3) # Distance of subject from camera
+  elevs: (90, 270) # Elevation
+  azims: (0,270) # Azimuth
+  ats: (0.25, 1.75) # camera position
+  ambients: (0.2, 0.99) # Ambient light 
+  speculars: (0, 0.1) # Specularity
+  diffuses: (0.2, 0.99) # Diffusivity
+  shininess: (30., 70.) # Shininess of the material
+  surface_offset_weight: (0.1, 1.2) # offset camera by a dsitance
+  znear: 1
+
+

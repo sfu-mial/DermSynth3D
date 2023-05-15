@@ -1,0 +1,36 @@
+name: 'Infer MultiTask'
+
+infer:
+  multi_head: False
+  backbone: False
+  model_path: '/path/to/trained/model/'
+
+  img_size: (320, 320)
+
+  # ImageNet
+  mean: (0.485, 0.456, 0.406)
+  std: (0.229, 0.224, 0.225)
+
+  # Test Type
+  mode: 1 # Choose to test on Fitz17k/ Ph2/ DermoFit
+  
+  # Data paths
+  fitz_imgs: './data/fitzpatrick17k/data/finalfitz17k/'
+  fitz_annot: './data/fitzpatrick17k/annotations/annotations/'
+  fitz_test_skin: './data/fitzpatrick17k/annotations/test/skin/'
+  fitz_test_anatomy: './data/fitzpatrick17k/annotations/test/anatomy/'
+  fitz_test_imgs: './data/fitzpatrick17k/annotations/test/images/'
+
+  ph2_imgs: './data/ph2/images'
+  ph2_test_skin: './data/ph2/preds/skin/'
+  ph2_test_images: './data/ph2/preds/images/'
+  ph2_test_targets: './data/ph2/preds/targets/'
+
+  derm_imgs: './data/dermofit/images/'
+  derm_targets: './data/dermofit/targets/'
+  derm_preds: './data/dermofit/predictions/'
+
+  prath_imgs: './data/Pratheepan_Dataset/FacePhoto/'
+  prath_tgts: './data/Pratheepan_Dataset/GroundT_FacePhoto/'
+  prath_preds_skin: './data/Pratheepan_Dataset/predictions/skin/'
+  prath_preds_anatomy: './data/Pratheepan_Dataset/predictions/anatomy/'

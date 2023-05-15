@@ -1,0 +1,51 @@
+name,label,three_partition_label,nine_partition_label,fitzpatrick,url
+0e5f2b371f082ab91db473d9913d326a,lentigo maligna,malignant,malignant melanoma,3,https://www.dermaamin.com/site/images/clinical-pic/L/lentigo-maligna/lentigo-maligna47.jpg
+1d56b7d688b6b276893107a6bdb93bba,melanoma,malignant,malignant melanoma,5,http://atlasdermatologico.com.br/img?imageId=4320
+0e02faeb96069dafc40b4d74f14a83ce,lupus erythematosus,non-neoplastic,inflammatory,3,http://atlasdermatologico.com.br/img?imageId=4050
+1a3485252a20ba5b11e3958881f21b4e,seborrheic keratosis,benign,benign epidermal,2,https://www.dermaamin.com/site/images/clinical-pic/s/seborrheic-keratoses/seborrheic-keratoses39.jpg
+0d6908a2080b42cb759ecf7980314d30,neutrophilic dermatoses,non-neoplastic,inflammatory,2,https://www.dermaamin.com/site/images/clinical-pic/s/sweet-syndrome/sweet-syndrome86.jpg
+0c9a63866e446cb601bdeb9a4d3787a6,telangiectases,benign,benign dermal,2,https://www.dermaamin.com/site/images/clinical-pic/g/glucagonoma_syndrome/glucagonoma_syndrome4.jpg
+0abb64cc8b25d8272ec1df73300600b3,neutrophilic dermatoses,non-neoplastic,inflammatory,2,https://www.dermaamin.com/site/images/clinical-pic/p/pyoderma-gangrenosum/pyoderma-gangrenosum5.jpg
+1d76114ea1cee496eb21836e03bb6aca,nevocytic nevus,benign,benign melanocyte,4,https://www.dermaamin.com/site/images/clinical-pic/n/nevocyticn-nevus/nevocyticn-nevus37.jpg
+0b40c010e442d29b496fa8368746b02a,tick bite,non-neoplastic,inflammatory,2,https://www.dermaamin.com/site/images/clinical-pic/t/tick-bite/tick-bite1.jpg
+1d5fec5379a83b91079dcc0721ba7a11,pyogenic granuloma,benign,benign dermal,2,https://www.dermaamin.com/site/images/clinical-pic/p/pyogenic-granuloma/pyogenic-granuloma106.jpg
+0e539304dcb700d132400c34f44d21b7,squamous cell carcinoma,malignant,malignant epidermal,3,http://atlasdermatologico.com.br/img?imageId=3023
+02cf3ed8e245eb520cce87fefbf5d574,necrobiosis lipoidica,non-neoplastic,inflammatory,2,https://www.dermaamin.com/site/images/clinical-pic/n/necrobiois-lipoidica-diabeticorum/necrobiois-lipoidica-diabeticorum69.jpg
+0e92cad8c3bc07d294b8b99991739b40,porokeratosis of mibelli,benign,benign epidermal,2,https://www.dermaamin.com/site/images/clinical-pic/p/porokeratosis_of_mibelli/porokeratosis_of_mibelli43.jpg
+0c0700fc7177d09e2df0c6658288cf8f,basal cell carcinoma,malignant,malignant epidermal,3,https://www.dermaamin.com/site/images/clinical-pic/c/carcinome_basocellulaire_nodulaire/carcinome_basocellulaire_nodulaire6.jpg
+1e4917eb8252158b3e1de9ab8a4110ff,melanoma,malignant,malignant melanoma,2,https://www.dermaamin.com/site/images/clinical-pic/m/melanome-superficiel-extensif/melanome-superficiel-extensif12.jpg
+2eb0b126f28b5128240072cc0cb920da,scleroderma,non-neoplastic,inflammatory,1,https://www.dermaamin.com/site/images/clinical-pic/s/scleredema/scleredema46.jpg
+0d138dfc5437475a31a7718a53be001a,mycosis fungoides,malignant,malignant cutaneous lymphoma,2,https://www.dermaamin.com/site/images/clinical-pic/m/mycosis-fongoide/mycosis-fongoide77.jpg
+0db67ec1711c7ab9d13c8fef53e527ea,dermatofibroma,benign,benign dermal,2,https://www.dermaamin.com/site/images/clinical-pic/d/dermatofibroma/dermatofibroma60.jpg
+1e105e35045a4c4147faee0e690fb580,neurodermatitis,non-neoplastic,inflammatory,4,https://www.dermaamin.com/site/images/clinical-pic/n/nummula-dermatitis/nummula-dermatitis5.jpg
+0c6695335edb59409519761fe3c3cfbb,granuloma annulare,non-neoplastic,inflammatory,5,https://www.dermaamin.com/site/images/clinical-pic/g/granuloma_annulare/granuloma_annulare38.jpg
+1c31b43cce49c0e53349f4f1adb59b1d,superficial spreading melanoma ssm,malignant,malignant melanoma,3,https://www.dermaamin.com/site/images/clinical-pic/s/superfacial-spreading-melanoma/superfacial-spreading-melanoma70.jpg
+0ee34d8cc387db6430bba2d2ce793ac9,superficial spreading melanoma ssm,malignant,malignant melanoma,2,https://www.dermaamin.com/site/images/clinical-pic/s/superfacial-spreading-melanoma/superfacial-spreading-melanoma92.jpg
+0d90cd2b2bf339a587dd7072372ff186,tuberous sclerosis,non-neoplastic,genodermatoses,4,https://www.dermaamin.com/site/images/clinical-pic/t/tuberous_sclerosis/tuberous_sclerosis106.jpg
+0e72ba059329555ffcfe32d627a15b7a,squamous cell carcinoma,malignant,malignant epidermal,2,https://www.dermaamin.com/site/images/clinical-pic/b/bowens_disease/bowens_disease31.jpg
+1d955fd4c6bc13509b5beb8e710b72b0,photodermatoses,non-neoplastic,inflammatory,4,https://www.dermaamin.com/site/images/clinical-pic/p/phytophotodermatitis/phytophotodermatitis34.jpg
+0a8d57f06114ff087d106c7137520927,port wine stain,benign,benign dermal,2,https://www.dermaamin.com/site/images/clinical-pic/p/port-wine-stain/port-wine-stain57.jpg
+0aebf00651ef3e45c7ac5b71472a08de,necrobiosis lipoidica,non-neoplastic,inflammatory,5,http://atlasdermatologico.com.br/img?imageId=4756
+01d4e1319fa2defaf41f8a82d6b0992c,granuloma annulare,non-neoplastic,inflammatory,1,https://www.dermaamin.com/site/images/clinical-pic/g/granuloma_annulare/granuloma_annulare56.jpg
+0ef0d6fa3124b76205a8d514b22fafaa,basal cell carcinoma,malignant,malignant epidermal,3,https://www.dermaamin.com/site/images/clinical-pic/b/basal_cell_carcinoma/basal_cell_carcinoma64.jpg
+1c858c3ce9f9ac220a08cb5338c4305d,neutrophilic dermatoses,non-neoplastic,inflammatory,5,https://www.dermaamin.com/site/images/clinical-pic/p/pyoderma-gangrenosum/pyoderma-gangrenosum55.jpg
+0e55b54825db2d67edecfe12d01144a6,basal cell carcinoma,malignant,malignant epidermal,3,https://www.dermaamin.com/site/images/clinical-pic/b/basal_cell_carcinoma/basal_cell_carcinoma53.jpg
+0f02445f98cf1f8c15392989839ffc5b,pityriasis rosea,non-neoplastic,inflammatory,2,http://atlasdermatologico.com.br/img?imageId=5628
+0d8457afebb67905127da37baece43d8,melanoma,malignant,malignant melanoma,5,https://www.dermaamin.com/site/images/clinical-pic/m/melanoma/melanoma34.jpg
+0c843edc73aa0b63ec9a266b937c3a3a,drug eruption,non-neoplastic,inflammatory,3,https://www.dermaamin.com/site/images/clinical-pic/d/drug_eruption/drug_eruption108.jpg
+0c7b64342387d294d8f790014182ccab,granuloma annulare,non-neoplastic,inflammatory,4,https://www.dermaamin.com/site/images/clinical-pic/g/granuloma_annulare/granuloma_annulare95.jpg
+0a55e2e0b4d0241785ba9787829c6dfc,porokeratosis actinic,benign,benign epidermal,3,http://atlasdermatologico.com.br/img?imageId=5952
+0afbf2ec3f745735dc677ca739055838,superficial spreading melanoma ssm,malignant,malignant melanoma,2,https://www.dermaamin.com/site/images/clinical-pic/s/superfacial-spreading-melanoma/superfacial-spreading-melanoma78.jpg
+1d3c886701ccc31c91a838bd54a01585,neutrophilic dermatoses,non-neoplastic,inflammatory,3,https://www.dermaamin.com/site/images/clinical-pic/p/pyoderma-gangrenosum/pyoderma-gangrenosum80.jpg
+1c444f036ad09acca39209e85c0a8dec,disseminated actinic porokeratosis,benign,benign epidermal,2,https://www.dermaamin.com/site/images/clinical-pic/d/disseminated_superficial_actinic_porokeratosis/disseminated_superficial_actinic_porokeratosis53.jpg
+2b2e5e50f71b0120cebe36d2aef3c085,acquired autoimmune bullous diseaseherpes gestationis,non-neoplastic,inflammatory,1,https://www.dermaamin.com/site/images/clinical-pic/h/herpes_gestationis/herpes_gestationis46.jpg
+02dfbc0e14a4655ca9190705fe1b7d56,pyogenic granuloma,benign,benign dermal,3,https://www.dermaamin.com/site/images/clinical-pic/p/pyogenic-granuloma/pyogenic-granuloma2.jpg
+0a102c96d763d98ab7eec9efd5a38d79,squamous cell carcinoma,malignant,malignant epidermal,6,http://atlasdermatologico.com.br/img?imageId=3010
+0d4c5e2266a00cd127cd5a676ac872b5,squamous cell carcinoma,malignant,malignant epidermal,3,https://www.dermaamin.com/site/images/clinical-pic/s/squamous-cell-carcinoma/squamous-cell-carcinoma94.jpg
+00f1b7bb9581e91250a2bb224c3321b8,melanoma,malignant,malignant melanoma,4,https://www.dermaamin.com/site/images/clinical-pic/m/melanoma/melanoma26.jpg
+1d21bcb48dc402bd8d7cb028c3e40f23,lupus erythematosus,non-neoplastic,inflammatory,5,http://atlasdermatologico.com.br/img?imageId=4113
+1e357b97835a4defa6add9bcc0034a89,juvenile xanthogranuloma,non-neoplastic,inflammatory,1,https://www.dermaamin.com/site/images/clinical-pic/J/juvenile-xanthogranuloma/juvenile-xanthogranuloma85.jpg
+0e16117b2b9d1e457987386e363cc03c,porokeratosis actinic,benign,benign epidermal,3,http://atlasdermatologico.com.br/img?imageId=8988
+1d1ee437001fa401e4a5916c93f7e2ae,kaposi sarcoma,malignant,malignant dermal,1,http://atlasdermatologico.com.br/img?imageId=2914
+0eae940a2c38375a082cc48bfc591676,neutrophilic dermatoses,non-neoplastic,inflammatory,3,http://atlasdermatologico.com.br/img?imageId=6913
+1e5066d9aa2063760e8378f311aef2a8,factitial dermatitis,non-neoplastic,inflammatory,3,https://www.dermaamin.com/site/images/clinical-pic/f/factitial_dermatitis/factitial_dermatitis37.jpg
