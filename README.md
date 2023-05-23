@@ -1,18 +1,18 @@
 # DermSynth3D
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/sfu-mial/DermSynth3D/tree/main.svg?style=svg&circle-token=176de57353747d240e619bdf9aacf9f716e7d04f)](https://dl.circleci.com/status-badge/redirect/gh/sfu-mial/DermSynth3D/tree/main) 
 ![GPLv3](https://img.shields.io/static/v1.svg?label=📃%20License&message=GPL%20v3.0&color=critical&style=flat-square)
-[![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=N/A&color=important&style=flat-square)](#) 
-[![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=N/A&color=informational&style=flat-square)](#) 
+[![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=2305.12621&color=important&style=flat-square)](https://arxiv.org/abs/2305.12621) 
+[![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=DOI&color=informational&style=flat-square)](https://doi.org/10.48550/arXiv.2305.12621) 
 [![request dataset](https://img.shields.io/static/v1.svg?label=Dataset&message=Request%20Dataset&style=flat-square&color=blueviolet)](https://cvi2.uni.lu/3dbodytexdermsynth/)
 [![Video](https://img.shields.io/badge/Video-Youtube-ff69b4?style=flat-square)](https://www.youtube.com/watch?v=x3gDBJCI_3k)
 
-This is the official code repository following our work [DermSynth3D](#link-to-arxiv).
+This is the official code repository following our work [DermSynth3D](https://arxiv.org/pdf/2305.12621.pdf).
 
 <!-- [![Video Thumbnail](http://img.youtube.com/vi/x3gDBJCI_3k/hq3.jpg)](http://www.youtube.com/watch?v=x3gDBJCI_3k) -->
 
 ## TL;DR
 
-A data generation pipeline for creating photorealistic _in-the-wild_  synthetic dermatalogical data with rich annotations such as semantic segmentation masks, depth maps, and bounding boxes for various skin analysis tasks.
+A data generation pipeline for creating photorealistic _in-the-wild_  synthetic dermatological data with rich annotations such as semantic segmentation masks, depth maps, and bounding boxes for various skin analysis tasks.
 
 ![main pipeline](assets/pipeline.png) 
 >_The figure shows the DermSynth3D computational pipeline where 2D segmented skin conditions are blended into the texture image of a 3D mesh on locations outside of the hair and clothing regions. After blending, 2D views of the mesh are rendered with a variety of camera viewpoints and lighting conditions and combined with background images to create a synthetic dermatology dataset._
@@ -471,11 +471,13 @@ You can look at `scripts/prep_data.py` for more details.
 ## Cite
 If you find this work useful or use any part of the code in this repo, please cite our paper:
 ```bibtext
-@unpublished{sinha2023ds,
-  title={DermSynth3D: Synthesis of in-the-wild annotated dermatology images},
-  author={Sinha, Ashish\textsuperscript{*}\textsuperscript{1} and Kawahara, Jeremy\textsuperscript{*}\textsuperscript{1} and Pakzad, Arezou\textsuperscript{1} and Abhishek, Kumar and Ruthven, Matthieu and Baratab, Enjie and Kacem, Anis and Aouada, Djamila and Hamarneh, Ghassan},
-  year={2023},
-  note={Preprint. Currently under review.},
+@misc{sinha2023dermsynth3d,
+      title={DermSynth3D: Synthesis of in-the-wild Annotated Dermatology Images}, 
+      author={Ashish Sinha and Jeremy Kawahara and Arezou Pakzad and Kumar Abhishek and Matthieu Ruthven and Enjie Ghorbel and Anis Kacem and Djamila Aouada and Ghassan Hamarneh},
+      year={2023},
+      eprint={2305.12621},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
 }
 ```
 
