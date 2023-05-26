@@ -8,7 +8,7 @@
 
 This is the official code repository following our work [DermSynth3D](https://arxiv.org/pdf/2305.12621.pdf).
 
-<!-- [![Video Thumbnail](http://img.youtube.com/vi/x3gDBJCI_3k/hq3.jpg)](http://www.youtube.com/watch?v=x3gDBJCI_3k) -->
+[![Video Thumbnail](assets/DERMSYNTH_YOUTUBE_THUMB.png)](http://www.youtube.com/watch?v=x3gDBJCI_3k) 
 
 ## TL;DR
 
