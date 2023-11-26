@@ -46,7 +46,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--percent_skin",
         "-ps",
-        default=None,
+        default=0.1,
         type=float,
         help="skin threshold for saving the view",
     )
@@ -77,17 +77,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--paste", action="store_true", help="whether to force pasting or not"
     )
+
     args = parser.parse_args()
     args = vars(args)
-
     for key in args:
         if args[key] is not None:
             if key in main["blending"]:
                 main["blending"][key] = args[key]
             if key in main["generate"]:
                 main["generate"][key] = args[key]
-
-    pprint("Config: ", main)
+    pprint(main)
     locations = SelectAndPaste(config=main, device=device)
     locations.paste_on_locations()
     blender = BlendLesions(config=main, device=device)
