@@ -88,7 +88,7 @@ DermSynth3D/
 ```bash
 git clone --recurse-submodules https://github.com/sfu-mial/DermSynth3D.git 
 cd DermSynth3D
-conda create --name dermsynth3d -f dermsynth3d.yml
+conda env create -f dermsynth3d.yml
 conda activate dermsynth3d
 ```
 

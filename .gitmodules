@@ -1,0 +1,3 @@
+[submodule "skin3d"]
+	path = skin3d
+	url = https://github.com/jeremykawahara/skin3d.git
