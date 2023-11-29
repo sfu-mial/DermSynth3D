@@ -172,8 +172,8 @@ class PasteTextureImage:
         view_seg_dilated = self.blend_dilated.view_seg()
         skin_mask = self.skin_mask()
         target_value = None
-        if self.normal_weight is not None:
-            target_value = self.normal_weight
+        # if self.normal_weight is not None:
+        #     target_value = self.normal_weight
 
         max_depth_diff = self.mesh_renderer.max_depth_difference_to_target(
             view_seg_dilated, skin_mask, target_value=target_value
