@@ -2,6 +2,8 @@ name: dermsynth3d
 channels:
   - pytorch3d
   - iopath
+  - bottler
+  - pytorch
   - fvcore
   - conda-forge
   - defaults
@@ -56,6 +58,8 @@ dependencies:
   - pysocks=1.7.1=py38h06a4308_0
   - python=3.8.15=h7a1cb2a_2
   - python_abi=3.8=2_cp38
+  - pytorch
+  - torchvision
   - pytorch3d=0.7.2=py38_cu113_pyt1100
   - pyyaml=6.0=py38h0a891b7_5
   - readline=8.2=h5eee18b_0
@@ -164,8 +168,6 @@ dependencies:
       - pywavelets==1.4.1
       - pyzmq==24.0.1
       - qudida==0.0.4
-      # - torch==1.10.0+cu111
-      # - torchvision==0.11.0+cu111
       - regex==2022.10.31
       - rfc3339-validator==0.1.4
       - rfc3986-validator==0.1.1
