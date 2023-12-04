@@ -2,6 +2,7 @@ import os
 import json
 import cv2
 import random
+import pdb
 
 import numpy as np
 import pandas as pd
@@ -66,7 +67,6 @@ class ImageDataset:
         self.target_preprocess = target_preprocess
         self.totensor = totensor
         self.color_constancy = color_constancy
-
         self.file_ids = self.file_ids()
 
     def __len__(self):
@@ -681,7 +681,6 @@ class Fitz17KAnnotations(ImageDataset):
 
     def selected_lesion_ids(self, file_ids=None):
         """Returns the IDs of non-empty selected lesions."""
-
         if file_ids is None:
             file_ids = self.file_ids
 

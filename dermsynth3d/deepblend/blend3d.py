@@ -23,6 +23,7 @@ class Blended3d:
     def __init__(
         self,
         mesh_filename: str,
+        device: str,
         dir_blended_textures: str,
         dir_nonskin_faces: Optional[str] = None,
         dir_anatomy: Optional[str] = None,
@@ -32,6 +33,7 @@ class Blended3d:
         self.dir_nonskin_faces = None  # dir_nonskin_faces
 
         self.dir_anatomy = dir_anatomy
+        self.device = device
 
         # This assumes that `mesh_filename` is in the format of 3dBodyTex.v1
         self.dir_original_mesh = mesh_filename.split("model_highres_0_normalized.obj")[
@@ -104,7 +106,7 @@ class Blended3d:
 
         img = load_image(filepath, mode=mode)
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 
@@ -114,7 +116,7 @@ class Blended3d:
             filepath = self.filepath_texture_image()
         img = load_image(filepath)
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 
@@ -172,7 +174,7 @@ class Blended3d:
     def pasted_texture_image(self, astensor=False):
         img = load_image(self.filepath_pasted_texture_image())
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 
@@ -194,21 +196,21 @@ class Blended3d:
     def blended_texture_image(self, astensor=False):
         img = load_image(self.filepath_blended_texture_image())
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 
     def dilated_texture_image(self, astensor=False):
         img = load_image(self.filepath_dilated_texture_image())
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 
     def nonskin_texture_mask(self, astensor=False):
         img = load_image(self.filepath_nonskin_texture_image())
         if astensor:
-            img = pil_to_tensor(img)
+            img = pil_to_tensor(img).to(self.device)
 
         return img
 

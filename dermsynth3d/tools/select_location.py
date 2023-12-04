@@ -58,6 +58,7 @@ class SelectAndPaste:
 
         self.blended3d = Blended3d(
             mesh_filename=self.mesh_filename,
+            device=self.device,
             dir_blended_textures=self.tex_dir,
             dir_nonskin_faces=None,
             extension=self.ext,
@@ -66,8 +67,8 @@ class SelectAndPaste:
         # Load the non-skin and original texture map
         self.nonskin_texture_mask_tensor = self.blended3d.nonskin_texture_mask(
             astensor=True
-        )
-        self.original_texture_image_tensor = self.blended3d.texture_image(astensor=True)
+        ).to(self.device)
+        self.original_texture_image_tensor = self.blended3d.texture_image(astensor=True).to(self.device)
 
     def load_mesh(self):
         # Load the mesh

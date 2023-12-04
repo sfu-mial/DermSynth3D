@@ -5,6 +5,7 @@ channels:
   - bottler
   - pytorch
   - fvcore
+  - pytorch
   - conda-forge
   - defaults
 dependencies:

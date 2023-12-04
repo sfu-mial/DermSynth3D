@@ -1,27 +1,22 @@
 import os
 import sys
-import cv2
-import yaml
 import argparse
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 import torch
-from scipy import ndimage
 from pprint import pprint
 
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 )
 sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, "skin3d"))
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            os.path.pardir, "skin3d")
+    )
 )
-
-from dermsynth3d import BlendLesions, Generate2DViews, SelectAndPaste
-
 from dermsynth3d.utils.utils import yaml_loader
-
+from dermsynth3d import BlendLesions, Generate2DViews, SelectAndPaste
 # Setup device
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
@@ -86,10 +81,20 @@ if __name__ == "__main__":
                 main["blending"][key] = args[key]
             if key in main["generate"]:
                 main["generate"][key] = args[key]
-    pprint(main)
+
+    print ("Running on device: {}".format(device))
+    print ("Running on mesh: {}".format(main["blending"]["mesh_name"]))
+    print ("Looking for suitable locations to paste...")
     locations = SelectAndPaste(config=main, device=device)
     locations.paste_on_locations()
+    print ("Blending lesions...")
+    print ("Blending with {} iterations".format(main["blending"]["num_iter"]))
+    print ("Blending with {} learning rate".format(main["blending"]["lr"]))
     blender = BlendLesions(config=main, device=device)
     blender.blend_lesions()
+    print ("Generating 2D views...")
+    print ("Generating {} views".format(main["generate"]["num_views"]))
+    print ("Generating views with {} skin threshold".format(main["generate"]["percent_skin"]))
     renderer = Generate2DViews(config=main, device=device)
     renderer.synthesize_views()
+    print ("Done for mesh: {}".format(main["blending"]["mesh_name"]))

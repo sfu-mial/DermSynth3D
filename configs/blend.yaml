@@ -4,17 +4,20 @@ name: DermSynth3d
 
 blending:
   # Path to 3DBodyTex v1
+  # bodytex_dir: "/local-scratch2/asa409/data/dermSynth/3dbodytex-1.1-highres"
   bodytex_dir: './data/3dbodytex-1.1-highres/'
   # Name of the mesh to blend
   mesh_name: '006-f-run'
   # Path to FitzPatrick17k lesions
+  # fitz_dir: "/local-scratch2/asa409/data/dermSynth/data/finalfitz17k"
   fitz_dir: './data/fitzpatrick17k/data/finalfitz17k/'
   # Path to annotated Fitz17k lesions with masks
   annot_dir: './data/annotations/'
+  # annot_dir: "/local-scratch2/asa409/data/dermSynth/annotations"
   # Path to save the new texture maps
   tex_dir: './data/lesions/'
   # Name of extension to add to new texture maps
-  ext: 'debug'
+  ext: 'latest'
   # Number of lesions to paste/blend on each mesh
   num_paste: 50
   # Number of iterations for blending the lesion
@@ -22,9 +25,9 @@ blending:
   # Learning rate for optimization
   lr: 0.005
   # Image size to render
-  img_w: 512
-  img_h: 512
-  view_size: (512, 512)
+  img_w: 64
+  img_h: 64
+  view_size: (64, 64)
 
 # Settings for generating 2D views from blended texture maps
 generate:
@@ -37,15 +40,17 @@ generate:
   # Path to anatomy labels for 3DBodyTex v1.
   anatomy_dir: './data/bodytex_anatomy_labels/'
   # Path to the background scenes
+  # background_dir: "/local-scratch2/asa409/data/dermSynth/IndoorScene"
   background_dir: './data/background/IndoorScene/'
+
   # Whether to paste lesions for cheap blending
   paste: False
   # Image size to render
-  img_w: 512
-  img_h: 512
-  view_size: (512, 512)
+  img_w: 64
+  img_h: 64
+  view_size: (64, 64)
   # Threshold amount of lesion to be present to generate a view
-  percent_skin: 0.2
+  percent_skin: 0.1
   # Paths to skin3d repo
   skin3d: './skin3d/data/3dbodytex-1.1-highres/bodytex.csv'
   # Paths to skin3d nevi annotations

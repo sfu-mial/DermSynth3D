@@ -56,13 +56,14 @@ class BlendLesions:
 
         self.blend3d = Blended3d(
             mesh_filename=self.mesh_filename,
+            device=self.device,
             dir_blended_textures=self.tex_dir,
             dir_nonskin_faces=None,
             extension=self.ext,
         )
 
         # Computes the deep blending loss
-        self.deepblend = DeepImageBlend()
+        self.deepblend = DeepImageBlend(gpu_id= self.device)
 
         # Wrapper for the blending process
         self.deepblend3d = DeepTextureBlend3d(

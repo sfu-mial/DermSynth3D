@@ -54,7 +54,7 @@ def max_value_in_window(img, window_size, pad_value=-1):
 
 def pil_to_tensor(img: PIL.Image.Image):
     img_np = (np.asarray(img) / 255).astype(np.float32)
-    img_tensor = torch.tensor(img_np, dtype=torch.float32).cuda()
+    img_tensor = torch.tensor(img_np, dtype=torch.float32)#.cuda()
     return img_tensor
 
 

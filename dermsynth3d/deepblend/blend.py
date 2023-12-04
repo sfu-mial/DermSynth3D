@@ -38,6 +38,7 @@ def texture_mask_of_lesion_mask_id(texture_mask, lesion_mask_id: int, device):
     )
     return lesion_id_texture_mask
 
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class PasteTextureImage:
     """
@@ -172,8 +173,6 @@ class PasteTextureImage:
         view_seg_dilated = self.blend_dilated.view_seg()
         skin_mask = self.skin_mask()
         target_value = None
-        # if self.normal_weight is not None:
-        #     target_value = self.normal_weight
 
         max_depth_diff = self.mesh_renderer.max_depth_difference_to_target(
             view_seg_dilated, skin_mask, target_value=target_value
@@ -335,17 +334,17 @@ class DeepTextureBlend3d:
             self.view_size = (512, 512)
 
         # Original texture image.
-        self.original_texture = self.blended3d.texture_image(astensor=True)
+        self.original_texture = self.blended3d.texture_image(astensor=True).to(self.device)
         # Mask for the texture image.
-        self.texture_mask = self.blended3d.lesion_texture_mask(astensor=True)
+        self.texture_mask = self.blended3d.lesion_texture_mask(astensor=True).to(self.device)
         # Pasted lesion on the texture image.
-        self.pasted_texture = self.blended3d.pasted_texture_image(astensor=True)
+        self.pasted_texture = self.blended3d.pasted_texture_image(astensor=True).to(self.device)
         # Lesion with expanded borders on the texture image.
-        self.dilated_texture = self.blended3d.dilated_texture_image(astensor=True)
+        self.dilated_texture = self.blended3d.dilated_texture_image(astensor=True).to(self.device)
 
         # This is the texture image we are blending on.
         # Load once so can blend multiple lesions.
-        self.texture_image = self.pasted_texture.clone().detach().contiguous().cuda()
+        self.texture_image = self.pasted_texture.clone().detach().contiguous().to(self.device)
         self.texture_image.requires_grad = True
 
     def set_params(self, params):
@@ -496,8 +495,6 @@ class DeepTextureBlend3d:
                 face_idx=face_idx,
                 view_size=self.view_size,
                 znear=1.0,
-                look_at=look_at,
-                camera_pos=camera_pos,
             )
 
             # Set to the blended texture image.
@@ -726,7 +723,7 @@ class Blend:
 
     def lesion_img(self, astensor=False):
         if astensor:
-            return numpy2tensor(self._lesion_img)
+            return numpy2tensor(self._lesion_img, gpu_id=device)
 
         return self._lesion_img
 
@@ -792,15 +789,15 @@ def blend_gradients(background_img, foreground_img, mask, gpu_id=0):
             Each tensor is of shape H x W.
     """
 
-    paste_tensor = numpy2tensor(foreground_img)
-    img_tensor = numpy2tensor(background_img)
+    paste_tensor = numpy2tensor(foreground_img, gpu_id = device)
+    img_tensor = numpy2tensor(background_img, gpu_id = device)
 
-    img_gradient = laplacian_filter_tensor(img_tensor, gpu_id)
+    img_gradient = laplacian_filter_tensor(img_tensor, gpu_id=device)
     img_r_grad = img_gradient[0].squeeze().cpu().detach().numpy()
     img_g_grad = img_gradient[1].squeeze().cpu().detach().numpy()
     img_b_grad = img_gradient[2].squeeze().cpu().detach().numpy()
 
-    dilated_gradient = laplacian_filter_tensor(paste_tensor, gpu_id)
+    dilated_gradient = laplacian_filter_tensor(paste_tensor, gpu_id=device)
     dilated_r_grad = dilated_gradient[0].squeeze().cpu().detach().numpy()
     dilated_g_grad = dilated_gradient[1].squeeze().cpu().detach().numpy()
     dilated_b_grad = dilated_gradient[2].squeeze().cpu().detach().numpy()
@@ -809,9 +806,9 @@ def blend_gradients(background_img, foreground_img, mask, gpu_id=0):
     g_grad_mod = dilated_g_grad * mask + img_g_grad * (1 - mask)
     b_grad_mod = dilated_b_grad * mask + img_b_grad * (1 - mask)
     rgb_gradient = [
-        numpy2tensor(r_grad_mod),
-        numpy2tensor(g_grad_mod),
-        numpy2tensor(b_grad_mod),
+        numpy2tensor(r_grad_mod, gpu_id = device),
+        numpy2tensor(g_grad_mod, gpu_id = device),
+        numpy2tensor(b_grad_mod, gpu_id = device),
     ]
 
     return rgb_gradient
@@ -843,7 +840,7 @@ def render_views_with_textures(
     # lesion_mask = mesh_renderer.lesion_mask(mask2d[:, :, 0], lesion_mask_id)
     lesion_mask = mask2d * mesh_renderer.body_mask()[:, :, np.newaxis]
     lesion_mask = (lesion_mask[:, :, 0] > 0.5) * 1
-    lesion_mask_tensor = numpy2tensor(lesion_mask[:, :, np.newaxis])
+    lesion_mask_tensor = numpy2tensor(lesion_mask[:, :, np.newaxis], gpu_id=device)
     xmin, xmax, ymin, ymax = mask2boundingbox(lesion_mask > 0.5, pad=pad)
 
     if xmin < 0:
@@ -858,7 +855,7 @@ def render_views_with_textures(
     # Pasted image.
     mesh_renderer.set_texture_image(texture_image=pasted_texture)
     pasted_img = mesh_renderer.render_view(asnumpy=True, asRGB=True)
-    pasted_img_tensor = numpy2tensor(pasted_img)
+    pasted_img_tensor = numpy2tensor(pasted_img, gpu_id=device)
 
     # Dilated image.
     mesh_renderer.set_texture_image(texture_image=dilated_texture)
@@ -867,7 +864,7 @@ def render_views_with_textures(
     # Original image.
     mesh_renderer.set_texture_image(texture_image=original_texture)
     original_img = mesh_renderer.render_view(asnumpy=True, asRGB=True)
-    original_img_tensor = numpy2tensor(original_img)
+    original_img_tensor = numpy2tensor(original_img, gpu_id=device)
 
     # Composite foreground and background to make the blended image.
     composite_img_tensor = composite_image(

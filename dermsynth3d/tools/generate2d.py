@@ -57,12 +57,13 @@ class Generate2DHelper:
         self.texture_nevi_mask = None
         self.percent_skin = percent_skin
         self.config = config
+        self.device = device
 
         # Load the mesh in pytorch3d.
-        mesh = load_objs_as_meshes([mesh_filename], device=device)
+        mesh = load_objs_as_meshes([mesh_filename], device=self.device)
         self.mesh_renderer = MeshRendererPyTorch3D(
             mesh,
-            device,
+            self.device,
             config=self.config,
         )
 
@@ -71,6 +72,7 @@ class Generate2DHelper:
 
         self.blended3d = Blended3d(
             mesh_filename=mesh_filename,
+            device=self.device,
             dir_blended_textures=dir_blended_textures,
             dir_anatomy=dir_anatomy,
             extension=blended_file_ext,
@@ -80,16 +82,16 @@ class Generate2DHelper:
         if is_blended:
             self.blended_texture_image = self.blended3d.blended_texture_image(
                 astensor=True
-            )
+            ).to(self.device)
         else:
             self.blended_texture_image = self.blended3d.pasted_texture_image(
                 astensor=True
-            )
+            ).to(self.device)
 
-        self.texture_lesion_mask = self.blended3d.lesion_texture_mask(astensor=True)
+        self.texture_lesion_mask = self.blended3d.lesion_texture_mask(astensor=True).to(self.device)
         self.nonskin_texture_mask_tensor = self.blended3d.nonskin_texture_mask(
             astensor=True
-        )
+        ).to(self.device)
 
         self.vertices_to_anatomy = self.blended3d.vertices_to_anatomy()
 
@@ -116,7 +118,7 @@ class Generate2DHelper:
 
             self.texture_nevi_mask = torch.tensor(
                 self.texture_nevi_mask / 255, dtype=torch.float32
-            ).cuda()
+            ).to(device)
 
         self.ray = trimesh.ray.ray_triangle.RayMeshIntersector(self.mesh_tri)
 
@@ -214,7 +216,7 @@ class Generate2DHelper:
         if (min_fraction_lesion < 0) or (min_fraction_lesion > 1):
             raise ValueError("`min_fraction_lesion` must be between 0 and 1.")
 
-        back_img, background_id = self.background_image()
+        back_img, background_id = self.background_image(view_size = self.view_size)
         self.background_id = background_id
 
         skin_mask = self.render_skin_mask()
@@ -233,7 +235,6 @@ class Generate2DHelper:
             lesion_id = np.random.permutation(self.fitz_ds.annotation_ids)[0]
             lesion_crop_orig, seg_crop_orig = self.fitz_ds.box_crop_lesion(
                 lesion_id,
-                pad=5,
                 force_even_dims=True,
                 asfloat=False,
             )
