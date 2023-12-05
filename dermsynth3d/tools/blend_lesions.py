@@ -103,7 +103,7 @@ class BlendLesions:
         )
 
         # For each lesion, run a seperate optimization
-        pbar1 = tqdm(total=self.deepblend3d.blended3d.lesion_params().shape[0], leave=False, desc="Blending Lesions")
+        pbar1 = tqdm(total=self.deepblend3d.blended3d.lesion_params().shape[0], leave=True, desc="Blending Lesions")
         for _, params in self.deepblend3d.blended3d.lesion_params().iterrows():
             self.deepblend3d.set_params(params)
             self.run = [0]

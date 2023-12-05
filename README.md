@@ -112,18 +112,23 @@ conda activate dermsynth3d
 
 ```bash
 # Build the container in the root dir
-docker build -t dermsynth3d --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f Dockerfile .
+docker build -t dermsynth3d --build-arg USER=$USER --build-arg UID=$(id -u) --build-arg GID=$(id -g) -f Dockerfile .
 # Run the container in interactive mode for using DermSynth3D
 # See 3. How to use DermSynth3D
-docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
+docker run --gpus all --user=root --runtime=nvidia -it --rm -v /path/to/downloaded/data:/data dermsynth3d
 ```
-We provide the [pre-built docker image](https://hub.docker.com/r/sinashish/dermsynth3d), which can be be used as well:
+We provide some [pre-built docker images](https://hub.docker.com/r/sinashish/dermsynth3d), which can be be used as well to:
 ```bash
-# pull the docker image
+# pull this latest docker image with the latest code
+# you need to prepare the data following the instructions below
 docker pull sinashish/dermsynth3d:latest
+
+# pull this image for trying out the code with demo data i.e. lesions and meshes
+docker pull sinashish/dermsynth3d:demo_w_code
+
 # Run the container in interactive GPU mode for generating data and training models
 # mount the data directory to the container
-docker run --gpus all -it --rm -v /path/to/downloaded/data:/data dermsynth3d
+docker run --gpus all -it --user=root --runtime=nvidia --rm -v /path/to/downloaded/data:/data dermsynth3d:<tag name>
 ```
 
 <span style="color: red">**NOTE**:</span> The code has been tested on Ubuntu 20.04 with CUDA 11.1, python 3.8, pytorch 1.10.0, and pytorch3d 0.7.2, and we don't know if it will work on CPU.
