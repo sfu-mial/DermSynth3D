@@ -8,6 +8,9 @@ import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
+from tqdm import tqdm, trange
+from time import sleep
 
 import torch
 from scipy import ndimage
@@ -38,6 +41,11 @@ class BlendLesions:
         self.lr = config["blending"]["lr"]
         self.device = device
         self.config = config
+        self.SAVE_DIR = Path(config["generate"]["save_dir"].split("/")[0]) /"processed_textures"
+        self.SAVE_DIR.mkdir(exist_ok=True, parents=True)
+        self.SAVE_DIR = self.SAVE_DIR / self.mesh_name
+        self.SAVE_DIR.mkdir(exist_ok=True, parents=True)
+        print (f"Saving blended textures to {self.SAVE_DIR}")
 
         self.mesh_filename = os.path.join(
             self.bodytex_dir, self.mesh_name, "model_highres_0_normalized.obj"
@@ -82,19 +90,7 @@ class BlendLesions:
         loss = self.deepblend3d.compute_loss_of_random_offset_view()
         loss.backward()
 
-        if self.run[0] % print_every == 0:
-            step_idx = len(self.deepblend3d.deepblend.losses) - 1
-            print(
-                "run: {}, loss: {:4f}, grad: {:4f}, style: {:4f}, content: {:4f}, tv: {:4f},".format(
-                    self.run,
-                    self.deepblend3d.deepblend.losses[step_idx]["loss"],
-                    self.deepblend3d.deepblend.losses[step_idx]["grad"],
-                    self.deepblend3d.deepblend.losses[step_idx]["style"],
-                    self.deepblend3d.deepblend.losses[step_idx]["content"],
-                    self.deepblend3d.deepblend.losses[step_idx]["tv"],
-                    # hist_loss.item(),
-                )
-            )
+        step_idx = len(self.deepblend3d.deepblend.losses) - 1
         self.run[0] += 1
         return loss
 
@@ -107,21 +103,24 @@ class BlendLesions:
         )
 
         # For each lesion, run a seperate optimization
+        pbar1 = tqdm(total=self.deepblend3d.blended3d.lesion_params().shape[0], leave=False, desc="Blending Lesions")
         for _, params in self.deepblend3d.blended3d.lesion_params().iterrows():
             self.deepblend3d.set_params(params)
-            print(
-                "Optimizing for face_idx = {}".format(
-                    int(self.deepblend3d.params.face_idx)
-                )
-            )
-
             self.run = [0]
-
+            
+            pbar = tqdm(total=self.num_iter, desc=f"Optimizing at face_idx ({int(self.deepblend3d.params.face_idx)})", leave=False, nrows=40)
             while self.run[0] <= self.num_iter:
                 self.optimizer.step(self.optimize)
+                # desc = f"L: {self.deepblend3d.deepblend.losses[-1]['loss']:.2f}, G: {self.deepblend3d.deepblend.losses[-1]['grad']:.2f}, S: {self.deepblend3d.deepblend.losses[-1]['style']:.2f}, C: {self.deepblend3d.deepblend.losses[-1]['content']:.2f}, TV: {self.deepblend3d.deepblend.losses[-1]['tv']:.2f}"
+                desc = f"Loss: {self.deepblend3d.deepblend.losses[-1]['loss']:.3f}"
+                pbar.set_postfix_str(desc, refresh=True)
+                pbar.update(self.run[0] - pbar.n)
+            pbar1.update(1)
 
         # Postprocess the blended textures
         merged_texture_np = self.deepblend3d.postprocess_blended_texture_image()
 
         # Save the final blended textures to disk.
-        self.blend3d.save_blended_texture_image(merged_texture_np, print_filename=True)
+        blended_filename = Path(self.SAVE_DIR) / f"model_highres_0_normalized_blended_{self.ext}.png"
+        self.blend3d.save_blended_texture_image(merged_texture_np, print_filename=False, filename=blended_filename)
+

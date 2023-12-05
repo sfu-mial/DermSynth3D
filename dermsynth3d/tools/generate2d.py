@@ -5,6 +5,8 @@ import trimesh
 import numpy as np
 import pandas as pd
 from typing import Optional
+from pathlib import Path
+from tqdm import tqdm, trange
 
 import torch
 import pytorch3d
@@ -636,6 +638,7 @@ class Generate2DViews:
         new_params = []
         count_skip = 0
         img_count = 0  # Counts the number of images saved to disk
+        pbar = tqdm(total=self.num_img+1, desc="Rendering 2D views")
         while img_count <= self.num_img:
             # keep rendering until num_img are rendered
             success = self.gen2d.randomize_parameters(config=self.config)
@@ -671,6 +674,7 @@ class Generate2DViews:
             params.update(self.gen2d.get_params())
             self.synth_ds.update_params(params)
             img_count += 1  # Increament counter.
+            pbar.update(1)
 
         # Save the params to disk.
         self.synth_ds.save_params()

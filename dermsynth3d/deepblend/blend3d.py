@@ -81,7 +81,7 @@ class Blended3d:
     def filepath_lesion_texture_mask(self):
         return os.path.join(self.dir_subject, "lesion_mask_" + self.extension + ".png")
 
-    def save_lesion_texture_mask(self, lesion_texture_mask, print_filename=False):
+    def save_lesion_texture_mask(self, lesion_texture_mask, print_filename=False, filename=None):
         """Saves the lesion mask array as a PNG image.
 
         Image saved with a default filename and path.
@@ -95,6 +95,8 @@ class Blended3d:
         Image.fromarray(lesion_texture_mask).save(filepath)
         if print_filename:
             print(filepath)
+        if filename is not None:
+            Image.fromarray(lesion_texture_mask).save(filename)
 
     def load_lesion_texture_mask(self):
         print("Depreciated: use `lesion_texture_mask()`")
@@ -150,26 +152,33 @@ class Blended3d:
             "model_highres_0_normalized_mask.png",
         )
 
-    def save_dilated_texture_mask(self, dilated_texture_mask, print_filepath=False):
+    def save_dilated_texture_mask(self, dilated_texture_mask, print_filepath=False, filename=None):
         filepath = self.filepath_dilated_texture_mask()
         Image.fromarray(dilated_texture_mask).save(filepath)
 
         if print_filepath:
             print(filepath)
+        if filename is not None:
+            Image.fromarray(dilated_texture_mask).save(filename)
 
-    def save_dilated_texture_image(self, dilated_texture_image, print_filepath=False):
+    def save_dilated_texture_image(self, dilated_texture_image, print_filepath=False, filename=None):
         filepath = self.filepath_dilated_texture_image()
         Image.fromarray(dilated_texture_image).save(filepath)
 
         if print_filepath:
             print(filepath)
+        if filename is not None:
+            Image.fromarray(dilated_texture_image).save(filename)
 
-    def save_pasted_texture_image(self, pasted_texture_image, print_filepath=False):
+
+    def save_pasted_texture_image(self, pasted_texture_image, print_filepath=False, filename=None):
         filepath = self.filepath_pasted_texture_image()
         Image.fromarray(pasted_texture_image).save(filepath)
 
         if print_filepath:
             print(filepath)
+        if filename is not None:
+            Image.fromarray(pasted_texture_image).save(filename)
 
     def pasted_texture_image(self, astensor=False):
         img = load_image(self.filepath_pasted_texture_image())
@@ -178,7 +187,7 @@ class Blended3d:
 
         return img
 
-    def save_blended_texture_image(self, blended_texture_image, print_filename=False):
+    def save_blended_texture_image(self, blended_texture_image, print_filename=False, filename=None):
         """Saves the texture image with a default filename and path.
 
         Args:
@@ -192,6 +201,8 @@ class Blended3d:
 
         if print_filename:
             print(filepath)
+        if filename is not None:
+            Image.fromarray(blended_texture_image).save(filename)
 
     def blended_texture_image(self, astensor=False):
         img = load_image(self.filepath_blended_texture_image())
@@ -219,11 +230,13 @@ class Blended3d:
             self.dir_subject, "lesion_params_" + self.extension + ".csv"
         )
 
-    def save_lesion_params(self, df, print_filepath=False):
+    def save_lesion_params(self, df, print_filepath=False, filename=None):
         filepath = self.filepath_lesion_params()
         df.to_csv(filepath, index=False)
         if print_filepath:
             print(filepath)
+        if filename is not None:
+            df.to_csv(filename, index=False)
 
     def lesion_params(self):
         df = pd.read_csv(self.filepath_lesion_params())

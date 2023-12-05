@@ -7,6 +7,8 @@ import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
+from tqdm import tqdm, trange
 
 import torch
 from scipy import ndimage
@@ -41,6 +43,10 @@ class SelectAndPaste:
         self.num_paste = config["blending"]["num_paste"]
         self.device = device
         self.config = config
+        self.SAVE_DIR = Path(config["generate"]["save_dir"].split("/")[0]) /"processed_textures"
+        self.SAVE_DIR.mkdir(exist_ok=True, parents=True)
+        self.SAVE_DIR = self.SAVE_DIR / self.mesh_name
+        self.SAVE_DIR.mkdir(exist_ok=True, parents=True)
 
         self.fitz_ds = Fitz17KAnnotations(
             dir_images=self.dir_fitzk_images,
@@ -73,6 +79,7 @@ class SelectAndPaste:
     def load_mesh(self):
         # Load the mesh
         self.mesh = load_objs_as_meshes([self.mesh_filename], device=self.device)
+        print (f"Successfully loaded {self.mesh_filename}")
         self.mesh_renderer = MeshRendererPyTorch3D(
             mesh=self.mesh,
             device=self.device,
@@ -111,6 +118,7 @@ class SelectAndPaste:
         # Start from the first randomly permuted face.
         face_iter = 0
 
+        pbar = tqdm(total=self.num_paste, desc="Pasting lesions",ncols=40, dynamic_ncols=True, leave=True)
         # Repeat until paste `n_paste` number of lesions.
         while lesion_mask_id <= self.num_paste:
             # Select a random face.
@@ -135,12 +143,15 @@ class SelectAndPaste:
 
             if max_depth_diff > 0.02:
                 # If max change exceeds a threshold, skip it.
-                print("Skipping {} due to high depth change".format(face_idx))
+                # print("Skipping {} due to high depth change".format(face_idx))
+                pbar.set_description(f"Skipping {face_idx} due to high depth change.", refresh=True)
                 continue
 
             accepted = self.paster.paste_masks_and_texture_images(lesion_mask_id)
             if not accepted:
-                print("Skipping {} as overlaps with existing lesion.".format(face_idx))
+                # print("Skipping {} as overlaps with existing lesion.".format(face_idx))
+                pbar.set_description(f"Skipping {face_idx} as overlaps with existing lesion.", refresh=True)
+                # pbar.postfix= f"Skipping {face_idx} as overlaps with existing lesion."
                 continue
 
             self.selected_params.append(
@@ -153,28 +164,39 @@ class SelectAndPaste:
                 }
             )
 
-            print("Accepted lesion_mask_id={}".format(lesion_mask_id))
+            pbar.set_description(f"Accepted {lesion_mask_id} lesion", refresh=True)
+            pbar.update(1)
             lesion_mask_id += 1
 
+        pbar.close()
         self.save_textures()
 
     def save_textures(self):
         # Save the pasted texture image.
+        print(f"Also Saving pasted lesion textures to {self.SAVE_DIR}")
+
+        pasted_filename = self.SAVE_DIR / f"model_highres_0_normalized_pasted_{self.ext}.png"
+        dilated_filename = self.SAVE_DIR / f"model_highres_0_normalized_dilated_{self.ext}.png"
+        lesion_mask_filename = self.SAVE_DIR / f"lesion_mask_{self.ext}.png"
+        lesion_dilated_mask_filename = self.SAVE_DIR / f"lesion_dilated_mask_{self.ext}.png"
+        params_filename = self.SAVE_DIR / f"lesion_params_{self.ext}.csv"
+
         self.blended3d.save_pasted_texture_image(
-            self.paster.pasted_texture, print_filepath=True
+            self.paster.pasted_texture, print_filepath=False, filename=pasted_filename
         )
         self.blended3d.save_dilated_texture_image(
-            self.paster.pasted_dilated_texture, print_filepath=True
+            self.paster.pasted_dilated_texture, print_filepath=False, filename=dilated_filename
         )
 
         # Save the lesion mask for the texture image.
         self.blended3d.save_lesion_texture_mask(
-            self.paster.lesion_mask.squeeze(), print_filename=True
+            self.paster.lesion_mask.squeeze(), print_filename=False, filename=lesion_mask_filename
         )
         self.blended3d.save_dilated_texture_mask(
-            self.paster.lesion_dilated_mask.squeeze(), print_filepath=True
+            self.paster.lesion_dilated_mask.squeeze(), print_filepath=False, filename=lesion_dilated_mask_filename
         )
 
         # Save the location parameters of the selected views.
         final_params_df = pd.DataFrame(self.selected_params)
-        self.blended3d.save_lesion_params(final_params_df, print_filepath=True)
+        self.blended3d.save_lesion_params(final_params_df, print_filepath=True, filename=params_filename)
+
