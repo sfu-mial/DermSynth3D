@@ -11,7 +11,7 @@ st.set_page_config(
         "About": "This is the demo app to try out the pipeline proposed in the paper DermSynth3D: A Dermatological Image Synthesis Framework for 3D Skin Lesions",
     },
 )
-from stpyvista import stpyvista
+# from stpyvista import stpyvista
 import pandas as pd
 import numpy as np
 from glob import glob
@@ -23,7 +23,6 @@ import pyrender
 import trimesh
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import pyvista as pv
 from pytorch3d.renderer import (
     look_at_view_transform,
     FoVPerspectiveCameras,
@@ -50,7 +49,6 @@ import matplotlib.pyplot as plt
 from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
 import plotly
 
-plotly.__version__
 import plotly.graph_objects as go
 from skimage import io
 from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
