@@ -19,7 +19,6 @@ import os, sys
 from PIL import Image
 import torch
 import torch.nn as nn
-import pyrender
 import trimesh
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
