@@ -1,0 +1,1 @@
+download the fitz17k.zip file from this link: https://vault.sfu.ca/index.php/s/cMuxZNzk6UUHNmX and unzip it in this folder.
