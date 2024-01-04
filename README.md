@@ -5,8 +5,11 @@
 [![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=DOI&color=informational&style=flat-square)](https://doi.org/10.48550/arXiv.2305.12621)
 [![request dataset](https://img.shields.io/static/v1.svg?label=Dataset&message=Request%20Dataset&style=flat-square&color=blueviolet)](https://cvi2.uni.lu/3dbodytexdermsynth/)
 [![Video](https://img.shields.io/badge/Video-Youtube-ff69b4?style=flat-square)](https://www.youtube.com/watch?v=x3gDBJCI_3k)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)
 
 :scroll: This is the official code repository for **DermSynth3D**.
+
+🤗**NEW** Try out the DermSynth3D web demo [here](https://huggingface.co/spaces/sinashish/DermSynth3D): [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)
 
 <a href="docs/preprint.pdf">
 <img src="assets/thumbnail1.png" alt="PDF thumbnail" height=auto width="100%">
