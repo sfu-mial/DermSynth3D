@@ -1,15 +1,18 @@
 # DermSynth3D
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/sfu-mial/DermSynth3D/tree/main.svg?style=svg&circle-token=176de57353747d240e619bdf9aacf9f716e7d04f)](https://dl.circleci.com/status-badge/redirect/gh/sfu-mial/DermSynth3D/tree/main)
+<!-- [![CircleCI](https://dl.circleci.com/status-badge/img/gh/sfu-mial/DermSynth3D/tree/main.svg?style=svg&circle-token=176de57353747d240e619bdf9aacf9f716e7d04f)](https://dl.circleci.com/status-badge/redirect/gh/sfu-mial/DermSynth3D/tree/main) -->
 ![GPLv3](https://img.shields.io/static/v1.svg?label=📃%20License&message=GPL%20v3.0&color=critical&style=flat-square)
 [![arXiv](https://img.shields.io/static/v1.svg?label=📄%20arXiv&message=2305.12621&color=important&style=flat-square)](https://arxiv.org/abs/2305.12621)
 [![DOI](https://img.shields.io/static/v1.svg?label=📄%20DOI&message=DOI&color=informational&style=flat-square)](https://doi.org/10.48550/arXiv.2305.12621)
 [![request dataset](https://img.shields.io/static/v1.svg?label=Dataset&message=Request%20Dataset&style=flat-square&color=blueviolet)](https://cvi2.uni.lu/3dbodytexdermsynth/)
 [![Video](https://img.shields.io/badge/Video-Youtube-ff69b4?style=flat-square)](https://www.youtube.com/watch?v=x3gDBJCI_3k)
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://tops-correctly-cub.ngrok-free.app/)
+<!--[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)-->
 
 :scroll: This is the official code repository for **DermSynth3D**.
 
-🤗**NEW** Try out the DermSynth3D web demo [here](https://huggingface.co/spaces/sinashish/DermSynth3D): [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)
+<!--🤗**NEW** Try out the DermSynth3D web demo [here](https://huggingface.co/spaces/sinashish/DermSynth3D): [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)-->
+🤗**NEW** Try out the DermSynth3D web demo [here](https://tops-correctly-cub.ngrok-free.app/).
+<!--: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://tops-correctly-cub.ngrok-free.app/)-->
 
 <a href="docs/preprint.pdf">
 <img src="assets/thumbnail1.png" alt="PDF thumbnail" height=auto width="100%">
