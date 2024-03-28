@@ -10,7 +10,7 @@
 
 :scroll: This is the official code repository for **DermSynth3D**.
 
-📢 DermSynth3D is now accepted to [MedIA](https://www.sciencedirect.com/journal/medical-image-analysis) 🎉.
+📢 DermSynth3D is now accepted to [MedIA](https://www.sciencedirect.com/science/article/pii/S1361841524000707) 🎉.
 
 <!--🤗**NEW** Try out the DermSynth3D web demo [here](https://huggingface.co/spaces/sinashish/DermSynth3D): [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://huggingface.co/spaces/sinashish/DermSynth3D)-->
 🤗**NEW** Try out the DermSynth3D web demo [here](https://tops-correctly-cub.ngrok-free.app/).
@@ -498,13 +498,13 @@ You can look at `scripts/prep_data.py` for more details.
 ## Cite
 If you find this work useful or use any part of the code in this repo, please cite our paper:
 ```bibtext
-@misc{sinha2023dermsynth3d,
-      title={DermSynth3D: Synthesis of in-the-wild Annotated Dermatology Images},
-      author={Ashish Sinha and Jeremy Kawahara and Arezou Pakzad and Kumar Abhishek and Matthieu Ruthven and Enjie Ghorbel and Anis Kacem and Djamila Aouada and Ghassan Hamarneh},
-      year={2023},
-      eprint={2305.12621},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
+@article{sinha2024dermsynth3d,
+  title={DermSynth3D: Synthesis of in-the-wild annotated dermatology images},
+  author={Sinha, Ashish and Kawahara, Jeremy and Pakzad, Arezou and Abhishek, Kumar and Ruthven, Matthieu and Ghorbel, Enjie and Kacem, Anis and Aouada, Djamila and Hamarneh, Ghassan},
+  journal={Medical Image Analysis},
+  pages={103145},
+  year={2024},
+  publisher={Elsevier}
 }
 ```
 
