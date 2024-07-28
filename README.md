@@ -16,7 +16,7 @@
 🤗**NEW** Try out the DermSynth3D web demo [here](https://tops-correctly-cub.ngrok-free.app/).
 <!--: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow?style=flat-square)](https://tops-correctly-cub.ngrok-free.app/)-->
 
-<a href="docs/preprint.pdf">
+<a href="https://www.cs.sfu.ca/~hamarneh/ecopy/media2024.pdf">
 <img src="assets/thumbnail1.png" alt="PDF thumbnail" height=auto width="100%">
 </a>
 
